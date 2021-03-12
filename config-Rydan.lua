@@ -1,0 +1,2 @@
+return {{[ [[dual]] ] = [[dagger]],[ [[cplvl]] ] = 150,[ [[vpot]] ] = [[refreshing]],[ [[attack1]] ] = [[hammer]],[ [[pbag]] ] = [[bag]],[ [[debuff2]] ] = [[dirt]],[ [[tdiff]] ] = -3,[ [[wield]] ] = [[dagger]],[ [[port]] ] = [[hold duff;enter;hold flute]],[ [[mpot]] ] = [[moonlight]],[ [[group]] ] = 1,[ [[debuff1]] ] = [[marbu]],[ [[hpot]] ] = [[elixir]],[ [[cpexp]] ] = 700,[ [[speak]] ] = [[false]],},
+}
