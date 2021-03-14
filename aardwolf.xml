@@ -5434,11 +5434,7 @@ registerAnonymousEventHandler("sysWindowResizeEvent","GUIframe.eventHandler")</s
   gStyleW = '&lt;font style="color:#ffffff"&gt;'
   gStyleG = '&lt;font style="color:#1aa41a"&gt;'
 	
-  if aard.qtime == 0 then
-    Tnl:setValue(aard.tnlmax-aard.tnl, aard.tnlmax, "&lt;b&gt;&amp;nbsp;Level: "..aard.level.."&amp;nbsp;TNL: "..aard.tnl..gStyleG.."&amp;nbsp; QT:"..aard.qtime.."&amp;nbsp;"..aard.noexp.."&amp;nbsp;"..aard.dtime.."&lt;/b&gt;")
-  else
-    Tnl:setValue(aard.tnlmax-aard.tnl, aard.tnlmax, "&lt;b&gt;&amp;nbsp;Level: "..aard.level.."&amp;nbsp;TNL: "..aard.tnl.."&amp;nbsp; QT:"..aard.qtime..gStyleG.."&amp;nbsp;"..aard.noexp.."&amp;nbsp;"..aard.dtime.."&lt;/b&gt;")
-  end	
+  GUI.Gauges.ToNextLevel:setValue(aard.tnl, aard.tnlmax)
 end
 
 function guiLoad()
@@ -7562,24 +7558,12 @@ end
 	if aard.ename == "" then
 		aard.ename = "enemy"
 	end
-	Enemy:setValue(aard.epct, 100, "&lt;b&gt; &amp;nbsp; "..aard.ename.." | "..string.format("%i", aard.epct).."%&lt;/b&gt;")	
+  GUI.Gauges.Enemy:setValue(aard.epct, 100)
 	gStyleW = '&lt;font style="color:#ffffff"&gt;'
 	gStyleR = '&lt;font style="color:#1aa41a"&gt;'
 	aard.qTimeNOexp()
-	if align &gt; 875 then
-		GaugeFrontCSS:set("background-color","QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 "..aard.goodc1..", stop: 1 "..aard.goodc2..")")--good
-		Align:setValue(align, 2500, "&lt;b&gt; &amp;nbsp; Align: "..align.."&lt;/b&gt;")
-	elseif align &gt; -1 then
-		GaugeFrontCSS:set("background-color","QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 "..aard.neutralc1..", stop: 1 "..aard.neutralc2..")")--neutral
-		Align:setValue(align, 2500, "&lt;b&gt; &amp;nbsp; Align: "..align.."&lt;/b&gt;")
-	elseif align &gt; -874 then
-		GaugeFrontCSS:set("background-color","QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 "..aard.neutralc1..", stop: 1 "..aard.neutralc2..")")--neutral negative		
-		Align:setValue(-1*align, 2500, "&lt;b&gt; &amp;nbsp; Align: "..align.."&lt;/b&gt;")
-	else
-		GaugeFrontCSS:set("background-color","QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 "..aard.evilc1..", stop: 1 "..aard.evilc2..")")--evil negative
-		Align:setValue(-1*align, 2500, "&lt;b&gt; &amp;nbsp; Align: "..align.."&lt;/b&gt;")
-	end
-	Align.front:setStyleSheet(GaugeFrontCSS:getCSS())
+  echo('align: '..align)
+  GUI.Gauges.Align:setValue(align, 2500)
 end</script>
 					<eventHandlerList>
 						<string>gmcp.char.status</string>
@@ -7889,9 +7873,8 @@ end</script>
   
   -- echo("aard.gui.Health"..aard.gui.Health)
   GUI.Gauges.Health:setValue(aard.hp, aard.maxhp)
-	-- Health:setValue(aard.hp, aard.maxhp,"&lt;b&gt; &amp;nbsp; "..aard.hp.."hp | "..string.format("%i", hp_pct).."% &amp;nbsp; ("..aard.hpot..")&lt;/b&gt;")
-	Mana:setValue(aard.mp, aard.maxmp,"&lt;b&gt; &amp;nbsp; "..aard.mp.."mp | "..string.format("%i", mp_pct).."% &amp;nbsp; ("..aard.spot..")&lt;/b&gt;")
-	Moves:setValue(aard.mv, aard.maxmv,"&lt;b&gt; &amp;nbsp; "..aard.mv.."mv | "..string.format("%i", mv_pct).."% &amp;nbsp; ("..aard.mpot..")&lt;/b&gt;")
+	GUI.Gauges.Mana:setValue(aard.mp, aard.maxmp)
+	GUI.Gauges.Moves:setValue(aard.mv, aard.maxmv)
 	
 	--update group values for my character from char.vitals because it updates faster than group info that is only every 2-3 seconds.
 	if aard.gindex ~= 0 then
@@ -8110,7 +8093,14 @@ function GUI.Gauge.new(args, container)
   local obj = {
     name = args.name,
     unit = args.unit,
-    format = args.format or "{name}: {value} {unit} | {percent}%"
+    mapValue = args.mapValue or function (self, value, maxValue)
+      return value, maxValue
+    end,
+    format = args.format or function (self, value, maxValue)
+      percent = (tonumber(value) / tonumber(maxValue)) * 100
+      return self.name..": "..value.." "..self.unit.." | "..string.format("%i", percent).."%"
+    end,
+    color = args.color
   }
   setmetatable(obj, GUI.Gauge)
   
@@ -8119,35 +8109,30 @@ function GUI.Gauge.new(args, container)
   }, container)
   obj.gauge.back:setStyleSheet(GUI.Gauges.GaugeBackCSS:getCSS())
   
-  local stylesheet = CSSMan.new(GUI.Gauges.GaugeFrontCSS:getCSS())
-  if args.color then
-    stylesheet:set("background-color", args.color)
-  end
-  obj.gauge.front:setStyleSheet(stylesheet:getCSS())
-  
   value = args.value or args.maxValue or 100
   maxValue = args.maxValue or args.value or 100
   obj:setValue(value, maxValue)
   
-  return gauge
+  return obj
 end
 
 function GUI.Gauge:setValue(value, maxValue)
-  echo('\ngauge:setValue: name:'..self.name..' value:'..value..', maxValue:'..maxValue..'\n')
-  percent = (tonumber(value) / tonumber(maxValue)) * 100
-  self.gauge:setValue(value, maxValue)
-  self.gauge.front:echo(self.name..": "..value.." "..self.unit.." | "..string.format("%i", pct).."%")
+  self.gauge:setValue(self:mapValue(value, maxValue))
+  label = self:format(value, maxValue)
+  self.gauge.back:echo(label)
+  self.gauge.front:echo(label)
+  
+  local stylesheet = CSSMan.new(GUI.Gauges.GaugeFrontCSS:getCSS())
+  if type(self.color) == 'function' then
+    stylesheet:set("background-color", self:color(value))
+  elseif type(self.color) == 'string' then
+    stylesheet:set("background-color", self.color)
+  end
+  self.gauge.front:setStyleSheet(stylesheet:getCSS())
 end
 
 if true or not GUI.Gauges then
   GUI.Gauges = {}
-  
-  function GUI.Gauges.setValue(gauge, value, total, label)
-    gauge:setValue(value, total)
-    gauge.front:echo(label)
-  end
-  
-  echo("Loading Gauges")
   
   GUI.Footer = Geyser.HBox:new({
     name = "GUI.Footer",
@@ -8170,6 +8155,7 @@ if true or not GUI.Gauges then
   
   -- Gauge Styles
   GUI.Gauges.GaugeBackCSS = CSSMan.new([[
+    font-weight: bold;
     background-color: QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #666,  stop: 1 #333);
     border-width: 1px;
     border-color: black;
@@ -8200,43 +8186,57 @@ if true or not GUI.Gauges then
     unit = "hp",
     color = "QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 "..aard.hpc1..", stop: 1 "..aard.hpc2..")"
   }, GUI.Gauges.Column1)
-  -- GUI.Gauges.Health.back:setStyleSheet(GUI.Gauges.GaugeBackCSS:getCSS())
-  -- GUI.Gauges.GaugeFrontCSS:set("background-color", "QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 "..aard.hpc1..", stop: 1 "..aard.hpc2..")")
-  -- GUI.Gauges.Health.front:setStyleSheet(GUI.Gauges.GaugeFrontCSS:getCSS())
-  -- GUI.Gauges.Health:setValue(100, 100)
-  -- GUI.Gauges.Health.front:echo("Health")
 
-	Moves = Geyser.Gauge:new({
+	GUI.Gauges.Moves = GUI.Gauge.new({
     name = "Moves",
-  },Column2)
-  Moves.back:setStyleSheet(GaugeBackCSS:getCSS())
-  GaugeFrontCSS:set("background-color","QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 "..aard.mvc1..", stop: 1 "..aard.mvc2..")")
-  Moves.front:setStyleSheet(GaugeFrontCSS:getCSS())
-  Moves:setValue(100,100,"&lt;b&gt; &amp;nbsp; mv&lt;/b&gt;")
+    unit = "mv",
+    color = "QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 "..aard.mvc1..", stop: 1 "..aard.mvc2..")"
+  }, GUI.Gauges.Column2)
 
-  Mana = Geyser.Gauge:new({
+  GUI.Gauges.Mana = GUI.Gauge.new({
     name = "Mana",
-  },Column2)
-  Mana.back:setStyleSheet(GaugeBackCSS:getCSS())
-  GaugeFrontCSS:set("background-color","QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 "..aard.mnc1..", stop: 1 "..aard.mnc2..")")
-  Mana.front:setStyleSheet(GaugeFrontCSS:getCSS())
-  Mana:setValue(100,100,"&lt;b&gt; &amp;nbsp; mp&lt;/b&gt;")
+    unit = "mn",
+    color = "QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 "..aard.mnc1..", stop: 1 "..aard.mnc2..")"
+  }, GUI.Gauges.Column2)
+  
+  GUI.Gauges.ToNextLevel = GUI.Gauge.new({
+    name = "Next Level",
+    unit = "xp",
+    mapValue = function (self, value, max)
+      return tonumber(max) - tonumber(value), max
+    end,
+    format = function (self, value, max)
+      return "Next Level: "..value.." xp"
+    end,
+    color = "QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 "..aard.tnlc1..", stop: 1 "..aard.tnlc2..")"
+  }, GUI.Gauges.Column3)
 
-  Tnl = Geyser.Gauge:new({
-    name = "Tnl",
-  },Column3)
-  Tnl.back:setStyleSheet(GaugeBackCSS:getCSS())
-  GaugeFrontCSS:set("background-color","QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 "..aard.tnlc1..", stop: 1 "..aard.tnlc2..")")
-  Tnl.front:setStyleSheet(GaugeFrontCSS:getCSS())
-  Tnl:setValue(100,100,"&lt;b&gt; &amp;nbsp; tnl&lt;/b&gt;")
-
-	Align = Geyser.Gauge:new({
+	GUI.Gauges.Align = GUI.Gauge.new({
     name = "Align",
-  },Column3)
-  Align.back:setStyleSheet(GaugeBackCSS:getCSS())
-  GaugeFrontCSS:set("background-color","QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 "..aard.neutralc1..", stop: 1 "..aard.neutralc2..")")
-  Align.front:setStyleSheet(GaugeFrontCSS:getCSS())
-  Align:setValue(100,100,"&lt;b&gt; &amp;nbsp; align&lt;/b&gt;")
+    unit = "",
+    mapValue = function (self, value, max)
+      if value &gt;= 0 then
+        return value, max
+      else 
+        return -1 * value, max
+      end
+    end,
+    color = function (self, v)
+      if v &gt; 875 then
+        -- Good
+        return "QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 "..aard.goodc1..", stop: 1 "..aard.goodc2..")"
+      elseif v &gt; -1 then
+        -- Neutral
+        return "QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 "..aard.neutralc1..", stop: 1 "..aard.neutralc2..")"
+      elseif v &gt; -874 then
+        -- Neutral Negative
+        return "QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 "..aard.neutralc1..", stop: 1 "..aard.neutralc2..")"	
+      else
+        -- Evil Negative
+        return "QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 "..aard.evilc1..", stop: 1 "..aard.evilc2..")"
+      end
+    end
+  }, GUI.Gauges.Column3)
 end
 </script>
 					<eventHandlerList />
