@@ -7554,7 +7554,6 @@ end
   	end
 	end
 
-	local align = gmcp.char.status.align	
 	if aard.ename == "" then
 		aard.ename = "enemy"
 	end
@@ -7562,8 +7561,7 @@ end
 	gStyleW = '&lt;font style="color:#ffffff"&gt;'
 	gStyleR = '&lt;font style="color:#1aa41a"&gt;'
 	aard.qTimeNOexp()
-  echo('align: '..align)
-  GUI.Gauges.Align:setValue(align, 2500)
+  GUI.Gauges.Align:setValue(gmcp.char.status.align, 2500)
 end</script>
 					<eventHandlerList>
 						<string>gmcp.char.status</string>
