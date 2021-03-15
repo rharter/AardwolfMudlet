@@ -7811,7 +7811,7 @@ end</script>
     	for i=gmcp.group.count+1,50 do
     		if group[i] then
     			group[i]:hide()
-    			echo("\ngroup["..i.."]:hide()\n")
+    			-- echo("\ngroup["..i.."]:hide()\n")
     		else
     			break--exit the loop, no containers exist beyond this index.
     		end
