@@ -4485,6 +4485,12 @@ aard.hpc2="#005500"
 aard.mnc1="#4570fc"
 aard.mnc2="#1133cc"
 
+aard.huc1="#A0522D"
+aard.huc2="#783516"
+
+aard.thrc1="#48bbd9"
+aard.thrc2="#1092b3"
+
 aard.mvc1="#b0b051"
 aard.mvc2="#555511"
 
@@ -7860,7 +7866,8 @@ end</script>
 	aard.hp, aard.maxhp = gmcp.char.vitals.hp, gmcp.char.maxstats.maxhp
 	aard.mp, aard.maxmp = gmcp.char.vitals.mana, gmcp.char.maxstats.maxmana
 	aard.mv, aard.maxmv = gmcp.char.vitals.moves, gmcp.char.maxstats.maxmoves
-
+    aard.hu, aard.thr = gmcp.char.status.hunger, gmcp.char.status.thirst
+    
 	local hp_pct = tostring(getPercent(aard.hp, aard.maxhp))
 	local mp_pct = tostring(getPercent(aard.mp, aard.maxmp))
 	local mv_pct = tostring(getPercent(aard.mv, aard.maxmv))
@@ -7873,6 +7880,8 @@ end</script>
   GUI.Gauges.Health:setValue(aard.hp, aard.maxhp)
 	GUI.Gauges.Mana:setValue(aard.mp, aard.maxmp)
 	GUI.Gauges.Moves:setValue(aard.mv, aard.maxmv)
+    GUI.Gauges.Hunger:setValue(aard.hu, 100)
+    GUI.Gauges.Thirst:setValue(aard.thr, 100)
 	
 	--update group values for my character from char.vitals because it updates faster than group info that is only every 2-3 seconds.
 	if aard.gindex ~= 0 then
@@ -8150,7 +8159,10 @@ if true or not GUI.Gauges then
   GUI.Gauges.Column3 = Geyser.VBox:new({
     name = "GUI.Gauges.Column3",
   }, GUI.Footer)
-  
+  GUI.Gauges.Column4 = Geyser.VBox:new({
+    name = "GUI.Gauges.Column4",
+  }, GUI.Footer)
+
   -- Gauge Styles
   GUI.Gauges.GaugeBackCSS = CSSMan.new([[
     font-weight: bold;
@@ -8197,6 +8209,18 @@ if true or not GUI.Gauges then
     color = "QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 "..aard.mnc1..", stop: 1 "..aard.mnc2..")"
   }, GUI.Gauges.Column2)
   
+  GUI.Gauges.Hunger = GUI.Gauge.new({
+    name = "Hunger",
+    unit = "hu",
+    color = "QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 "..aard.huc1..", stop: 1 "..aard.huc2..")"
+  }, GUI.Gauges.Column3)
+  
+  GUI.Gauges.Thirst = GUI.Gauge.new({
+    name = "Thirst",
+    unit = "thr",
+    color = "QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 "..aard.thrc1..", stop: 1 "..aard.thrc2..")"
+  }, GUI.Gauges.Column3)
+
   GUI.Gauges.ToNextLevel = GUI.Gauge.new({
     name = "Next Level",
     unit = "xp",
@@ -8207,7 +8231,7 @@ if true or not GUI.Gauges then
       return "Next Level: "..value.." xp"
     end,
     color = "QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 "..aard.tnlc1..", stop: 1 "..aard.tnlc2..")"
-  }, GUI.Gauges.Column3)
+  }, GUI.Gauges.Column4)
 
 	GUI.Gauges.Align = GUI.Gauge.new({
     name = "Align",
@@ -8234,7 +8258,7 @@ if true or not GUI.Gauges then
         return "QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 "..aard.evilc1..", stop: 1 "..aard.evilc2..")"
       end
     end
-  }, GUI.Gauges.Column3)
+  }, GUI.Gauges.Column4)
 end
 </script>
 					<eventHandlerList />
