@@ -2197,10 +2197,52 @@ end</script>
 				</regexCodePropertyList>
 			</Trigger>
 			<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+				<name>HungerTracker</name>
+				<script>GUI.Gauges.Hunger:setValue(100, 100)
+</script>
+				<triggerType>0</triggerType>
+				<conditonLineDelta>0</conditonLineDelta>
+				<mStayOpen>0</mStayOpen>
+				<mCommand></mCommand>
+				<packageName></packageName>
+				<mFgColor>#ff0000</mFgColor>
+				<mBgColor>#ffff00</mBgColor>
+				<mSoundFile></mSoundFile>
+				<colorTriggerFgColor>#000000</colorTriggerFgColor>
+				<colorTriggerBgColor>#000000</colorTriggerBgColor>
+				<regexCodeList>
+					<string>^You are now full\.$</string>
+				</regexCodeList>
+				<regexCodePropertyList>
+					<integer>1</integer>
+				</regexCodePropertyList>
+			</Trigger>
+			<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+				<name>ThirstTracker</name>
+				<script>GUI.Gauges.Thirst:setValue(100, 100)
+</script>
+				<triggerType>0</triggerType>
+				<conditonLineDelta>0</conditonLineDelta>
+				<mStayOpen>0</mStayOpen>
+				<mCommand></mCommand>
+				<packageName></packageName>
+				<mFgColor>#ff0000</mFgColor>
+				<mBgColor>#ffff00</mBgColor>
+				<mSoundFile></mSoundFile>
+				<colorTriggerFgColor>#000000</colorTriggerFgColor>
+				<colorTriggerBgColor>#000000</colorTriggerBgColor>
+				<regexCodeList>
+					<string>^Your thirst is fully quenched\.$</string>
+				</regexCodeList>
+				<regexCodePropertyList>
+					<integer>1</integer>
+				</regexCodePropertyList>
+			</Trigger>
+			<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
 				<name>healthPotionTracker</name>
 				<script>aard.hpot = tonumber(matches[2]) or 1
 local hp_pct = tostring(getPercent(aard.hp, aard.maxhp))
-Health:setValue(aard.hp, aard.maxhp,"&lt;b&gt; &amp;nbsp; "..aard.hp.."hp | "..string.format("%i", hp_pct).."% &amp;nbsp; ("..aard.hpot..")&lt;/b&gt;")
+GUI.Gauges.Health:setValue(aard.hp, aard.maxhp,"&lt;b&gt; &amp;nbsp; "..aard.hp.."hp | "..string.format("%i", hp_pct).."% &amp;nbsp; ("..aard.hpot..")&lt;/b&gt;")
 
 -- Clan			lvl	Health (Heal)
 -- Masaki		201 -=Warm Sake=-
@@ -2248,7 +2290,7 @@ Health:setValue(aard.hp, aard.maxhp,"&lt;b&gt; &amp;nbsp; "..aard.hp.."hp | "..s
 				<name>manaPotionTracker</name>
 				<script>aard.spot = tonumber(matches[2]) or 1
 local mp_pct = tostring(getPercent(aard.mp, aard.maxmp))
-Mana:setValue(aard.mp, aard.maxmp,"&lt;b&gt; &amp;nbsp; "..aard.mp.."mp | "..string.format("%i", mp_pct).."% &amp;nbsp; ("..aard.spot..")&lt;/b&gt;")
+GUI.Gauges.Mana:setValue(aard.mp, aard.maxmp,"&lt;b&gt; &amp;nbsp; "..aard.mp.."mp | "..string.format("%i", mp_pct).."% &amp;nbsp; ("..aard.spot..")&lt;/b&gt;")
 
 -- Clan			lvl	Mana (black lotus)
 -- Dominion	201 Moonlight Wine
@@ -2314,7 +2356,7 @@ Mana:setValue(aard.mp, aard.maxmp,"&lt;b&gt; &amp;nbsp; "..aard.mp.."mp | "..str
 				<name>movePotionTracker</name>
 				<script>aard.mpot = tonumber(matches[2]) or 1
 local mv_pct = tostring(getPercent(aard.mv, aard.maxmv))
-Moves:setValue(aard.mv, aard.maxmv,"&lt;b&gt; &amp;nbsp; "..aard.mv.."mv | "..string.format("%i", mv_pct).."% &amp;nbsp; ("..aard.mpot..")&lt;/b&gt;")
+GUI.Gauges.Moves:setValue(aard.mv, aard.maxmv,"&lt;b&gt; &amp;nbsp; "..aard.mv.."mv | "..string.format("%i", mv_pct).."% &amp;nbsp; ("..aard.mpot..")&lt;/b&gt;")
 
 -- Clan			lvl	Moves (refresh)
 -- Daoine		150 FaetorAde
@@ -8491,7 +8533,7 @@ if aard.hpot &gt; 0 then
 	aard.hpot = aard.hpot -1
 end
 local hp_pct = tostring(getPercent(aard.hp, aard.maxhp))
-Health:setValue(aard.hp, aard.maxhp,"&lt;b&gt; &amp;nbsp; "..aard.hp.."hp | "..string.format("%i", hp_pct).."% &amp;nbsp; ("..aard.hpot..")&lt;/b&gt;")</script>
+GUI.Gauges.Health:setValue(aard.hp, aard.maxhp,"&lt;b&gt; &amp;nbsp; "..aard.hp.."hp | "..string.format("%i", hp_pct).."% &amp;nbsp; ("..aard.hpot..")&lt;/b&gt;")</script>
 				<command></command>
 				<keyCode>47</keyCode>
 				<keyModifier>536870912</keyModifier>
@@ -8505,7 +8547,7 @@ if aard.hpot &gt; 0 then
 	aard.hpot = aard.hpot -1
 end
 local hp_pct = tostring(getPercent(aard.hp, aard.maxhp))
-Health:setValue(aard.hp, aard.maxhp,"&lt;b&gt; &amp;nbsp; "..aard.hp.."hp | "..string.format("%i", hp_pct).."% &amp;nbsp; ("..aard.hpot..")&lt;/b&gt;")</script>
+GUI.Gauges.Health:setValue(aard.hp, aard.maxhp,"&lt;b&gt; &amp;nbsp; "..aard.hp.."hp | "..string.format("%i", hp_pct).."% &amp;nbsp; ("..aard.hpot..")&lt;/b&gt;")</script>
 				<command></command>
 				<keyCode>47</keyCode>
 				<keyModifier>570425344</keyModifier>
@@ -8519,7 +8561,7 @@ if aard.spot &gt; 0 then
 	aard.spot = aard.spot -1
 end
 local mp_pct = tostring(getPercent(aard.mp, aard.maxmp))
-Mana:setValue(aard.mp, aard.maxmp,"&lt;b&gt; &amp;nbsp; "..aard.mp.."mp | "..string.format("%i", mp_pct).."% &amp;nbsp; ("..aard.spot..")&lt;/b&gt;")</script>
+GUI.Gauges.Mana:setValue(aard.mp, aard.maxmp,"&lt;b&gt; &amp;nbsp; "..aard.mp.."mp | "..string.format("%i", mp_pct).."% &amp;nbsp; ("..aard.spot..")&lt;/b&gt;")</script>
 				<command></command>
 				<keyCode>42</keyCode>
 				<keyModifier>536870912</keyModifier>
@@ -8533,7 +8575,7 @@ if aard.mpot &gt; 0 then
 	aard.mpot = aard.mpot -1
 end
 local mv_pct = tostring(getPercent(aard.mv, aard.maxmv))
-Moves:setValue(aard.mv, aard.maxmv,"&lt;b&gt; &amp;nbsp; "..aard.mv.."mv | "..string.format("%i", mv_pct).."% &amp;nbsp; ("..aard.mpot..")&lt;/b&gt;")</script>
+GUI.Gauges.Moves:setValue(aard.mv, aard.maxmv,"&lt;b&gt; &amp;nbsp; "..aard.mv.."mv | "..string.format("%i", mv_pct).."% &amp;nbsp; ("..aard.mpot..")&lt;/b&gt;")</script>
 				<command></command>
 				<keyCode>45</keyCode>
 				<keyModifier>536870912</keyModifier>
