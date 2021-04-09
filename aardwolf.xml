@@ -4085,6 +4085,7 @@ guiLoad()</script>
 --aard.config["group"]=1,
 --aard.config["tdiff"]=-3,
 --aard.config["speak"]="false",
+--aard.config["clanshop"]="true",
 
 --display(matches[2])
 --display(matches[3])
@@ -4158,6 +4159,10 @@ echo("\n")
 
 decho("  &lt;51,102,255&gt;- &lt;192,192,192&gt;Speak alerts instead of sounds: ") setFgColor(51,102,255)
 echoLink(aard.config["speak"], "printCmdLine'vconfig speak '", "Click to override audio alerts with speech.", true)
+echo("\n")
+
+decho("  &lt;51,102,255&gt;- &lt;192,192,192&gt;Show clanshop flyout: ") setFgColor(51,102,255)
+echoLink(aard.config["clanshop"], "printCmdLine'vconfig clanshop '", "Click to hide or show clanshops", true)
 echo("\n")
 
 setFgColor(192,192,192)
@@ -4509,6 +4514,7 @@ aard.configDefault = {
 ["group"]=1,
 ["tdiff"]=-3,
 ["speak"]="false", -- Stringly typed because of user input in vconfig
+["clanshop"]="true"
 }
 
 --Automatically toggle noexp once your TNL is less than this amount on CP level +1
@@ -5541,7 +5547,6 @@ registerAnonymousEventHandler(
 					if (aard.map.enable) then aard:init_map() end
 					aard.init = true
 					aard.log:info("Scripts initialized")
-					cShopMenu()--if rooms are missing from map this can break loading, do it last.
         end)
       end
     end
@@ -8122,6 +8127,9 @@ end
     end
 	else
 		table.save(getMudletHomeDir().."/aardwolf/config-"..gmcp.char.base.name..".lua", aard.config)
+  end
+  if mainlabel == nil and aard.config["clanshop"] == "true" then
+    cShopMenu()--if rooms are missing from map this can break loading, do it last.
   end
 end</script>
 					<eventHandlerList>
