@@ -8256,13 +8256,13 @@ if true or not GUI.Gauges then
 
   GUI.Gauges.Hunger = GUI.Gauge.new({
     name = "Hunger",
-    unit = "hu",
+    unit = "",
     color = "QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 "..aard.huc1..", stop: 1 "..aard.huc2..")"
   }, GUI.Gauges.Column3)
 
   GUI.Gauges.Thirst = GUI.Gauge.new({
     name = "Thirst",
-    unit = "thr",
+    unit = "",
     color = "QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 "..aard.thrc1..", stop: 1 "..aard.thrc2..")"
   }, GUI.Gauges.Column3)
 
