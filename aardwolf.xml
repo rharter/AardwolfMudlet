@@ -2244,7 +2244,7 @@ GUI.Gauges.Thirst:setValue(aard.thr, 100)
 				<name>healthPotionTracker</name>
 				<script>aard.hpot = tonumber(matches[2]) or 1
 local hp_pct = tostring(getPercent(aard.hp, aard.maxhp))
-GUI.Gauges.Health:setValue(aard.hp, aard.maxhp," &amp; ("..aard.hpot..")")
+GUI.Gauges.Health:setValue(aard.hp, aard.maxhp," | ("..aard.hpot..") pots")
 
 -- Clan			lvl	Health (Heal)
 -- Masaki		201 -=Warm Sake=-
@@ -2292,7 +2292,7 @@ GUI.Gauges.Health:setValue(aard.hp, aard.maxhp," &amp; ("..aard.hpot..")")
 				<name>manaPotionTracker</name>
 				<script>aard.spot = tonumber(matches[2]) or 1
 local mp_pct = tostring(getPercent(aard.mp, aard.maxmp))
-GUI.Gauges.Mana:setValue(aard.mp, aard.maxmp," &amp; ("..aard.spot..")")
+GUI.Gauges.Mana:setValue(aard.mp, aard.maxmp," | ("..aard.spot..") pots")
 
 -- Clan			lvl	Mana (black lotus)
 -- Dominion	201 Moonlight Wine
@@ -2358,7 +2358,7 @@ GUI.Gauges.Mana:setValue(aard.mp, aard.maxmp," &amp; ("..aard.spot..")")
 				<name>movePotionTracker</name>
 				<script>aard.mpot = tonumber(matches[2]) or 1
 local mv_pct = tostring(getPercent(aard.mv, aard.maxmv))
-GUI.Gauges.Moves:setValue(aard.mv, aard.maxmv," &amp; ("..aard.mpot..")")
+GUI.Gauges.Moves:setValue(aard.mv, aard.maxmv," | ("..aard.mpot..") pots")
 
 -- Clan			lvl	Moves (refresh)
 -- Daoine		150 FaetorAde
@@ -7921,9 +7921,9 @@ end</script>
 	end
 
   -- echo("aard.gui.Health"..aard.gui.Health)
-    GUI.Gauges.Health:setValue(aard.hp, aard.maxhp," &amp; ("..aard.hpot..")")
-	GUI.Gauges.Mana:setValue(aard.mp, aard.maxmp," &amp; ("..aard.spot..")")
-	GUI.Gauges.Moves:setValue(aard.mv, aard.maxmv," &amp; ("..aard.mpot..")")
+    GUI.Gauges.Health:setValue(aard.hp, aard.maxhp," | ("..aard.hpot..") pots")
+	GUI.Gauges.Mana:setValue(aard.mp, aard.maxmp," | ("..aard.spot..") pots")
+	GUI.Gauges.Moves:setValue(aard.mv, aard.maxmv," | ("..aard.mpot..") pots")
     GUI.Gauges.Hunger:setValue(aard.hu, 100)
     GUI.Gauges.Thirst:setValue(aard.thr, 100)
 
@@ -8173,6 +8173,8 @@ function GUI.Gauge:setValue(value, maxValue, text)
   label = self:format(value, maxValue) .. appending
   self.gauge.back:echo(label)
   self.gauge.front:echo(label)
+  self.gauge.back:setFontSize(16)
+  self.gauge.front:setFontSize(16)
 
   local stylesheet = CSSMan.new(GUI.Gauges.GaugeFrontCSS:getCSS())
   if type(self.color) == 'function' then
@@ -8536,7 +8538,7 @@ if aard.hpot &gt; 0 then
 	aard.hpot = aard.hpot -1
 end
 local hp_pct = tostring(getPercent(aard.hp, aard.maxhp))
-GUI.Gauges.Health:setValue(aard.hp, aard.maxhp," &amp; ("..aard.hpot..")")</script>
+GUI.Gauges.Health:setValue(aard.hp, aard.maxhp," | ("..aard.hpot..") pots")</script>
 				<command></command>
 				<keyCode>47</keyCode>
 				<keyModifier>536870912</keyModifier>
@@ -8550,7 +8552,7 @@ if aard.spot &gt; 0 then
 	aard.spot = aard.spot -1
 end
 local mp_pct = tostring(getPercent(aard.mp, aard.maxmp))
-GUI.Gauges.Mana:setValue(aard.mp, aard.maxmp," &amp; ("..aard.spot..")")</script>
+GUI.Gauges.Mana:setValue(aard.mp, aard.maxmp," | ("..aard.spot..") pots")</script>
 				<command></command>
 				<keyCode>42</keyCode>
 				<keyModifier>536870912</keyModifier>
@@ -8564,7 +8566,7 @@ if aard.mpot &gt; 0 then
 	aard.mpot = aard.mpot -1
 end
 local mv_pct = tostring(getPercent(aard.mv, aard.maxmv))
-GUI.Gauges.Moves:setValue(aard.mv, aard.maxmv," &amp; ("..aard.mpot..")")</script>
+GUI.Gauges.Moves:setValue(aard.mv, aard.maxmv," | ("..aard.mpot..") pots")</script>
 				<command></command>
 				<keyCode>45</keyCode>
 				<keyModifier>536870912</keyModifier>
