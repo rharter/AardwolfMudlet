@@ -8586,27 +8586,19 @@ GUI.Gauges.Moves:setValue(aard.mv, aard.maxmv," | ("..aard.mpot..") pots")</scri
 				<keyModifier>536870912</keyModifier>
 			</Key>
 			<Key isActive="yes" isFolder="no">
-				<name>+ spellup / attack spell</name>
+				<name>+ buff / attack spell</name>
 				<packageName></packageName>
 				<script>if aard.state == 8 then
 	send(aard.config["attack1"],true)--in combat
 else
-	send("napalm;spellup int;spellup wis;spellup luck;spellup stats;spellup",true)--out of combat
+	send(aard.config["buff"],true)--out of combat
 end</script>
 				<command></command>
 				<keyCode>43</keyCode>
 				<keyModifier>536870912</keyModifier>
 			</Key>
 			<Key isActive="yes" isFolder="no">
-				<name>shift +   pre-spellup</name>
-				<packageName></packageName>
-				<script>send("c 'intellect fortress';c awakening;c perception;c 'self harmony';c calculation;napalm")</script>
-				<command></command>
-				<keyCode>43</keyCode>
-				<keyModifier>570425344</keyModifier>
-			</Key>
-			<Key isActive="yes" isFolder="no">
-				<name>. scan / debuff</name>
+				<name>.  scan / debuff1</name>
 				<packageName></packageName>
 				<script>if aard.state == 8 then
 	send(aard.config["debuff1"],true)--in combat, debuff
@@ -8618,13 +8610,9 @@ end</script>
 				<keyModifier>536870912</keyModifier>
 			</Key>
 			<Key isActive="yes" isFolder="no">
-				<name>7 con all / else combat</name>
+				<name>7 score</name>
 				<packageName></packageName>
-				<script>if aard.state == 8 then
-	send(aard.config["debuff2"],true)--in combat
-else
-	send("con all",true)--out of combat
-end</script>
+				<script>send("score",true)</script>
 				<command></command>
 				<keyCode>55</keyCode>
 				<keyModifier>536870912</keyModifier>
@@ -8700,12 +8688,12 @@ send("n",true)</script>
 				<keyModifier>536870912</keyModifier>
 			</Key>
 			<Key isActive="yes" isFolder="no">
-				<name>0 key</name>
+				<name>0 con all / debuff2</name>
 				<packageName></packageName>
 				<script>if aard.state == 8 then
 	send(aard.config["debuff2"],true)--in combat
 else
-	send("score",true)--out of combat
+  send("con all",true)--out of combat
 end</script>
 				<command></command>
 				<keyCode>48</keyCode>
