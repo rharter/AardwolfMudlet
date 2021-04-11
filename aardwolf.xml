@@ -4086,6 +4086,7 @@ guiLoad()</script>
 --aard.config["tdiff"]=-3,
 --aard.config["speak"]="false",
 --aard.config["clanshop"]="true",
+--aard.config["buff"]="strength",
 
 --display(matches[2])
 --display(matches[3])
@@ -4135,6 +4136,10 @@ echo("\n")
 
 decho("  &lt;51,102,255&gt;- &lt;192,192,192&gt;Primary Attack: ") setFgColor(51,102,255)
 echoLink(aard.config["attack1"], "printCmdLine'vconfig attack1 '", "Click to set the Primary Attack to use.", true)
+
+decho("  &lt;51,102,255&gt;- &lt;192,192,192&gt;Buff: ") setFgColor(51,102,255)
+echoLink(aard.config["buff"], "printCmdLine'vconfig buff '", "Click to set the Buff to use.", true)
+echo("\n")
 
 decho("  &lt;51,102,255&gt;- &lt;192,192,192&gt;Primary Debuff: ") setFgColor(51,102,255)
 echoLink(aard.config["debuff1"], "printCmdLine'vconfig debuff1 '", "Click to set the Primary Debuff to use.", true)
@@ -4507,6 +4512,7 @@ aard.configDefault = {
 ["dual"]="dagger",
 ["port"]="hold duff;enter;hold flute",
 ["attack1"]="hammer",
+["buff"]="strength",
 ["debuff1"]="marbu",
 ["debuff2"]="dirt",
 ["cplvl"]=150,
