@@ -2083,7 +2083,7 @@ end</script>
 				<script>clearWindow("minimap")</script>
 				<triggerType>0</triggerType>
 				<conditonLineDelta>0</conditonLineDelta>
-				<mStayOpen>20</mStayOpen>
+				<mStayOpen>21</mStayOpen>
 				<mCommand></mCommand>
 				<packageName></packageName>
 				<mFgColor>#ff0000</mFgColor>
@@ -2197,10 +2197,54 @@ end</script>
 				</regexCodePropertyList>
 			</Trigger>
 			<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+				<name>HungerTracker</name>
+				<script>aard.hu = gmcp.char.status.hunger
+GUI.Gauges.Hunger:setValue(aard.hu, 100)
+</script>
+				<triggerType>0</triggerType>
+				<conditonLineDelta>0</conditonLineDelta>
+				<mStayOpen>0</mStayOpen>
+				<mCommand></mCommand>
+				<packageName></packageName>
+				<mFgColor>#ff0000</mFgColor>
+				<mBgColor>#ffff00</mBgColor>
+				<mSoundFile></mSoundFile>
+				<colorTriggerFgColor>#000000</colorTriggerFgColor>
+				<colorTriggerBgColor>#000000</colorTriggerBgColor>
+				<regexCodeList>
+					<string>^You are now full\.$</string>
+				</regexCodeList>
+				<regexCodePropertyList>
+					<integer>1</integer>
+				</regexCodePropertyList>
+			</Trigger>
+			<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+				<name>ThirstTracker</name>
+				<script>aard.thr = gmcp.char.status.thirst
+GUI.Gauges.Thirst:setValue(aard.thr, 100)
+</script>
+				<triggerType>0</triggerType>
+				<conditonLineDelta>0</conditonLineDelta>
+				<mStayOpen>0</mStayOpen>
+				<mCommand></mCommand>
+				<packageName></packageName>
+				<mFgColor>#ff0000</mFgColor>
+				<mBgColor>#ffff00</mBgColor>
+				<mSoundFile></mSoundFile>
+				<colorTriggerFgColor>#000000</colorTriggerFgColor>
+				<colorTriggerBgColor>#000000</colorTriggerBgColor>
+				<regexCodeList>
+					<string>^Your thirst is fully quenched\.$</string>
+				</regexCodeList>
+				<regexCodePropertyList>
+					<integer>1</integer>
+				</regexCodePropertyList>
+			</Trigger>
+			<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
 				<name>healthPotionTracker</name>
 				<script>aard.hpot = tonumber(matches[2]) or 1
 local hp_pct = tostring(getPercent(aard.hp, aard.maxhp))
-Health:setValue(aard.hp, aard.maxhp,"&lt;b&gt; &amp;nbsp; "..aard.hp.."hp | "..string.format("%i", hp_pct).."% &amp;nbsp; ("..aard.hpot..")&lt;/b&gt;")
+GUI.Gauges.Health:setValue(aard.hp, aard.maxhp," | ("..aard.hpot..") pots")
 
 -- Clan			lvl	Health (Heal)
 -- Masaki		201 -=Warm Sake=-
@@ -2225,7 +2269,7 @@ Health:setValue(aard.hp, aard.maxhp,"&lt;b&gt; &amp;nbsp; "..aard.hp.."hp | "..s
 -- druid		 60 \|/ Ogham Bark \|/
 
 -- Aylor		  1 (!(Light Relief)!)		\(!\(Light Relief\)!\)|\(!\(Serious Relief\)!\)|\(!\(Critical Care\)!\)
--- Aylor		 20 (!(Serious Relief)!)  
+-- Aylor		 20 (!(Serious Relief)!)
 -- Aylor		 40 (!(Critical Care)!)   </script>
 				<triggerType>0</triggerType>
 				<conditonLineDelta>0</conditonLineDelta>
@@ -2248,7 +2292,7 @@ Health:setValue(aard.hp, aard.maxhp,"&lt;b&gt; &amp;nbsp; "..aard.hp.."hp | "..s
 				<name>manaPotionTracker</name>
 				<script>aard.spot = tonumber(matches[2]) or 1
 local mp_pct = tostring(getPercent(aard.mp, aard.maxmp))
-Mana:setValue(aard.mp, aard.maxmp,"&lt;b&gt; &amp;nbsp; "..aard.mp.."mp | "..string.format("%i", mp_pct).."% &amp;nbsp; ("..aard.spot..")&lt;/b&gt;")
+GUI.Gauges.Mana:setValue(aard.mp, aard.maxmp," | ("..aard.spot..") pots")
 
 -- Clan			lvl	Mana (black lotus)
 -- Dominion	201 Moonlight Wine
@@ -2256,7 +2300,7 @@ Mana:setValue(aard.mp, aard.maxmp,"&lt;b&gt; &amp;nbsp; "..aard.mp.."mp | "..str
 -- Tao			201	-=[ Essence of the Jade Dragon ]=-
 -- Seekers  201 (Seekers) Potion of Lotus Flower
 -- Touchston201 (&gt;TouchStone&lt;) Sardonyx Gem Extract
--- Pyre			201 Sigil of Solitude 
+-- Pyre			201 Sigil of Solitude
 -- Crimson	200	Meade of the Gods
 -- DoH			200	Flourish of Magic
 -- Tanelorn 200 Philter of Peace
@@ -2314,7 +2358,7 @@ Mana:setValue(aard.mp, aard.maxmp,"&lt;b&gt; &amp;nbsp; "..aard.mp.."mp | "..str
 				<name>movePotionTracker</name>
 				<script>aard.mpot = tonumber(matches[2]) or 1
 local mv_pct = tostring(getPercent(aard.mv, aard.maxmv))
-Moves:setValue(aard.mv, aard.maxmv,"&lt;b&gt; &amp;nbsp; "..aard.mv.."mv | "..string.format("%i", mv_pct).."% &amp;nbsp; ("..aard.mpot..")&lt;/b&gt;")
+GUI.Gauges.Moves:setValue(aard.mv, aard.maxmv," | ("..aard.mpot..") pots")
 
 -- Clan			lvl	Moves (refresh)
 -- Daoine		150 FaetorAde
@@ -2561,16 +2605,16 @@ function pupreport()
 		statspace = " "
 	end
 	local xpmob = math.floor(aard.mobexp/aard.mobcount)
-	
+
 	local secs = aard.clevel-aard.plevel
 	local xpsec = aard.mobexp/secs
 	local xpmin = math.floor(xpsec*60)
-	
+
 	--aard.pupstr = aard.pupstr..statspace..aard.ltime.." @W"..aard.mobcount.."@ymobs (@W"..xpmob.."@yxp/mob @W"..xpmin.."@yxp/min)"
 	aard.pupstr = aard.pupstr..statspace..aard.ltime
 	--StatMonitor: Gained a pup: 3+1 = 4 trains int+wis bonus 01m:58s 14 mobs killed (63.93xp/mob 508xp/min)
 	--titan/terra i hear are 4/5 man max
-	
+
 	if gmcp.group then
 		if gmcp.group.count then
       if gmcp.group.count &lt; 5 then
@@ -2583,11 +2627,11 @@ function pupreport()
 	--decho("All", "&lt;50,50,0:0,255,0&gt;test")
 	--128-128-0
 	--255-255-255
-	
+
 	--reset values
 	aard.mobcount = 0
 	aard.mobexp = 0
-	
+
 	setTriggerStayOpen("pupstat",0)
 end
 
@@ -3171,14 +3215,14 @@ end
 if gmcp.group then
   if aard.group[v] then
   	aard.group[v].alldam = tonumber(aard.group[v].alldam) + tonumber(damage)
-  		
+
   	if aard.group[v][attack] then
   		aard.group[v][attack] = tonumber(aard.group[v][attack]) + tonumber(damage)
   	else
   		aard.group[v][attack] = tonumber(damage)
   	end
   end
-  
+
   if gmcp.group.count then
     if gmcp.group.count &gt; 4 then
   		if aard.group[attacker:sub(1, -3)] or aard.group[attacker:sub(1, -2)] then
@@ -3412,12 +3456,12 @@ end
 aard.qTarget = matches[2]
 if aard.areaInfo[matches[3]] then
 	--local areaID = findAreaID(aard.areaInfo[matches[3]].zone)
-	local areaID = lookupAreaID(aard.areaInfo[matches[3]].zone)	
+	local areaID = lookupAreaID(aard.areaInfo[matches[3]].zone)
 	local areaExits = getAreaExits(areaID)
 	-- check area exits and figure out which room has the shortest path cost, its likely the entrance.
-	if not areaExits[1] then--must be noexit/portal entrance	
+	if not areaExits[1] then--must be noexit/portal entrance
 		--check all path costs and choose the lowest cost
-    local roomlist = getAreaRooms(areaID)  
+    local roomlist = getAreaRooms(areaID)
     -- obtain a room list for each of the room IDs we got
 		lowestcost = 9000
 		tryroom = 0
@@ -3429,8 +3473,8 @@ if aard.areaInfo[matches[3]] then
 			end
     end
   	echo(" ")
-  	hechoLink("|cFF0000-"..tryroom, [[gotoRoom(]]..tryroom..[[)]], "runto "..tryroom, true)				
-		
+  	hechoLink("|cFF0000-"..tryroom, [[gotoRoom(]]..tryroom..[[)]], "runto "..tryroom, true)
+
 	elseif not areaExits[2] then--only one possible room
 		echo(" ")
 		--display(areaExits[1])
@@ -3438,17 +3482,17 @@ if aard.areaInfo[matches[3]] then
 	else--multiple exits
 
 		lowestcost = 9000
-		tryroom = 0		
+		tryroom = 0
     for _, id in pairs(areaExits) do
 			local pathable,cost = getPath(aard.map.current_room,id)
 			if pathable == true and cost &lt; lowestcost then
 				lowestcost = cost
 				tryroom = id
 			end
-    end		
+    end
   	echo(" ")
   	hechoLink("|cFF0000"..tryroom, [[gotoRoom(]]..tryroom..[[)]], "runto "..tryroom, true)
-		
+
 	end
 else
 	--aard.roomFind(matches[3])--must be a room cp
@@ -3887,7 +3931,7 @@ if not aard.itemIgnore[matches[2]] then
   local a1 = matches[2]
   local v1 = matches[3]
   echo("\n"..a1..":"..v1)
-  
+
   if matches[5] then
     local a2 = matches[5]
     local v2 = matches[6]
@@ -4026,7 +4070,7 @@ guiLoad()</script>
 			<Alias isActive="yes" isFolder="no">
 				<name>vconfig</name>
 				<script>--(?:\| Stat Mods  \:|\| Resist Mods\:|\| Skill Mods \: Modifies|\| Spells     \: \d+ (?:use|uses) of level|\|            \:
--- \d+ (?:use|uses) of level|\|| ) ([a-zA-Z0-9]+(?: [a-zA-Z]+)*)[ ]*(?:\: \+|\: |by \+| ')[ ]*([a-zA-Z0-9,+-&gt;]+(?: [a-zA-Z]+)*)[']*  
+-- \d+ (?:use|uses) of level|\|| ) ([a-zA-Z0-9]+(?: [a-zA-Z]+)*)[ ]*(?:\: \+|\: |by \+| ')[ ]*([a-zA-Z0-9,+-&gt;]+(?: [a-zA-Z]+)*)[']*
 
 --aard.config["hpot"]="elixir",
 --aard.config["mpot"]="moonlight",
@@ -4041,6 +4085,8 @@ guiLoad()</script>
 --aard.config["group"]=1,
 --aard.config["tdiff"]=-3,
 --aard.config["speak"]="false",
+--aard.config["clanshop"]="true",
+--aard.config["buff"]="strength",
 
 --display(matches[2])
 --display(matches[3])
@@ -4091,6 +4137,10 @@ echo("\n")
 decho("  &lt;51,102,255&gt;- &lt;192,192,192&gt;Primary Attack: ") setFgColor(51,102,255)
 echoLink(aard.config["attack1"], "printCmdLine'vconfig attack1 '", "Click to set the Primary Attack to use.", true)
 
+decho("  &lt;51,102,255&gt;- &lt;192,192,192&gt;Buff: ") setFgColor(51,102,255)
+echoLink(aard.config["buff"], "printCmdLine'vconfig buff '", "Click to set the Buff to use.", true)
+echo("\n")
+
 decho("  &lt;51,102,255&gt;- &lt;192,192,192&gt;Primary Debuff: ") setFgColor(51,102,255)
 echoLink(aard.config["debuff1"], "printCmdLine'vconfig debuff1 '", "Click to set the Primary Debuff to use.", true)
 
@@ -4114,6 +4164,10 @@ echo("\n")
 
 decho("  &lt;51,102,255&gt;- &lt;192,192,192&gt;Speak alerts instead of sounds: ") setFgColor(51,102,255)
 echoLink(aard.config["speak"], "printCmdLine'vconfig speak '", "Click to override audio alerts with speech.", true)
+echo("\n")
+
+decho("  &lt;51,102,255&gt;- &lt;192,192,192&gt;Show clanshop flyout: ") setFgColor(51,102,255)
+echoLink(aard.config["clanshop"], "printCmdLine'vconfig clanshop '", "Click to hide or show clanshops", true)
 echo("\n")
 
 setFgColor(192,192,192)
@@ -4331,16 +4385,16 @@ function aard.audioAlert(event)
       aard.log:error("Undefined speech audio alert: " .. event)
       return
     end
-  
+
     ttsSpeak(GUIframe.speech[event])
     return
   end
-  
+
   if GUIframe.sounds[event] == nil then
     aard.log:error("Undefined audio alert: " .. event)
     return
   end
-  
+
   playSoundFile(GUIframe.sounds[event])
 end
 
@@ -4458,6 +4512,7 @@ aard.configDefault = {
 ["dual"]="dagger",
 ["port"]="hold duff;enter;hold flute",
 ["attack1"]="hammer",
+["buff"]="strength",
 ["debuff1"]="marbu",
 ["debuff2"]="dirt",
 ["cplvl"]=150,
@@ -4465,6 +4520,7 @@ aard.configDefault = {
 ["group"]=1,
 ["tdiff"]=-3,
 ["speak"]="false", -- Stringly typed because of user input in vconfig
+["clanshop"]="true"
 }
 
 --Automatically toggle noexp once your TNL is less than this amount on CP level +1
@@ -4484,6 +4540,12 @@ aard.hpc2="#005500"
 
 aard.mnc1="#4570fc"
 aard.mnc2="#1133cc"
+
+aard.huc1="#A0522D"
+aard.huc2="#783516"
+
+aard.thrc1="#48bbd9"
+aard.thrc2="#1092b3"
 
 aard.mvc1="#b0b051"
 aard.mvc2="#555511"
@@ -4671,9 +4733,9 @@ GUIframe.configs.styleFlash = GUIframe.configs.styleFlash or ""
 
 function GUIframe.blink()
   if GUIframe.configs.blinkID then killTimer(GUIframe.configs.blinkID) end
-  if not GUIframe.configs.blink then 
+  if not GUIframe.configs.blink then
     GUIframe.configs.blinkTimerOn = false
-    return 
+    return
   end
   --if not GUIframe.tabs[tab].hidden then
 		if GUIframe.configs.flashing == true then
@@ -5032,7 +5094,7 @@ local function refresh()
     y = GUIframe.bottomContainer:get_y()
     GUIframe.resizeBottom:move(x, y - rH)
 end
-	
+
 -- enables the resize label for the given side and shows all associated containers if hidden
 function GUIframe.enable(side)
     if not GUIframe.initialized then error("GUIframe not initialized",2) end
@@ -5433,8 +5495,8 @@ registerAnonymousEventHandler("sysWindowResizeEvent","GUIframe.eventHandler")</s
 				<script>function aard.qTimeNOexp()
   gStyleW = '&lt;font style="color:#ffffff"&gt;'
   gStyleG = '&lt;font style="color:#1aa41a"&gt;'
-	
-  GUI.Gauges.ToNextLevel:setValue(aard.tnl, aard.tnlmax)
+
+    GUI.Gauges.ToNextLevel:setValue(aard.tnlmax-aard.tnl, aard.tnlmax, "&lt;br&gt;Quest: "..aard.qtime.." Blessing: "..aard.dtime)
 end
 
 function guiLoad()
@@ -5485,13 +5547,12 @@ registerAnonymousEventHandler(
 					GUIframe.activate("All")
 					styleLoad()--set scrollbar stylesheet
         	local mapw = 232
-        	local maph = 255	
+        	local maph = 255
         	minimap = Geyser.MiniConsole:new({name="minimap",x=0,y=0,width=mapw,height=maph,color="black",font="Source Code Pro Black",fontSize=10})
         	minimapsnap()
 					if (aard.map.enable) then aard:init_map() end
 					aard.init = true
 					aard.log:info("Scripts initialized")
-					cShopMenu()--if rooms are missing from map this can break loading, do it last.
         end)
       end
     end
@@ -5502,37 +5563,37 @@ registerAnonymousEventHandler(
 			<Script isActive="yes" isFolder="no">
 				<name>onInGame</name>
 				<packageName></packageName>
-				<script>-- Actions to occur once we are truly 'in' the game. 
+				<script>-- Actions to occur once we are truly 'in' the game.
 -- Will only fire on first connect/reconnect
 function onInGame()
-	setServerEncoding("UTF-8")	
+	setServerEncoding("UTF-8")
 	aard.command = nil -- clear this so that the mapper does not think our mud password is a special exit command
-	
-	-- Need to be fully in-game before getting room/sector info	
+
+	-- Need to be fully in-game before getting room/sector info
 	sendGMCP('Core.Supports.Set [ "Char 1", "Comm 1", "Room 1", "Group 1" ]')
 	sendGMCP("tags on")
 	sendGMCP("maptype 1")
 	-- sendGMCP("group on")
-  
-	
+
+
 	sendGMCP("request room")
 	sendGMCP("request sectors")
 	sendGMCP("request char")
 	sendGMCP("request quest") --used for quest time
-	
+
 	--sendGMCP("gmcpchannels on") -- ommit channels from main output
-	
+
 
 	send("tags map on",false)-- enable maptags so we can capture minimap.
-	send("map",false)-- sends the command "map" to the mud without echoing to the screen.	
+	send("map",false)-- sends the command "map" to the mud without echoing to the screen.
 	send("look in "..aard.config["pbag"],false)-- look in potion container so we can update our count when logging in.
 	send("daily",false)--daily blessing status not available via GMCP, so we need to check it, to set the timer.
-	
+
 	aard.command = nil -- clear this so that the mapper does not think our mud password is a special exit command
-	
+
 	--map off:
 	--sendGMCP("maptype -1")
-	
+
 	 --"0 - Standard ASCII based map|"
    --"1 - Solid single line map|"
    --"2 - Solid double line map|"
@@ -5568,7 +5629,7 @@ aard.adt.deaths = aard.adt.deaths or {}</script>
   	aard.adt.pups[clan][player] = 1
   end
 	setTriggerStayOpen("infogate",0)
-	deleteLine()	
+	deleteLine()
 end
 
 function lvl(clan,player)
@@ -5580,7 +5641,7 @@ function lvl(clan,player)
   	aard.adt.lvls[clan][player] = 1
   end
 	setTriggerStayOpen("infogate",0)
-	deleteLine()	
+	deleteLine()
 end
 
 function death(clan,player)
@@ -5613,9 +5674,9 @@ aard.areaInfo = aard.areaInfo or {}</script>
 					<name>init_map</name>
 					<packageName></packageName>
 					<script>function aard:init_map()
-  
+
   --sendGMCP("rawcolor on")
-  
+
   aard.map.current_zone = nil
   aard.map.current_room = nil
   aard.map.prior_room = nil
@@ -5623,10 +5684,10 @@ aard.areaInfo = aard.areaInfo or {}</script>
   aard.map.seen_room = nil
   aard.map.terrain = {}
   aard.map.sectors = nil
-  
+
   aard.map.init = true
   aard.log:info("Initalized aard mapper")
-	
+
 end</script>
 					<eventHandlerList />
 				</Script>
@@ -5742,11 +5803,11 @@ end</script>
 		mapx = GUIframe.tabCoords.topRightTabs.x - mapw - 22
 		mapy = GUIframe.tabCoords.topRightTabs.y
 	end
-	
+
   if minimap then
 		--minimap
 		minimap:move(mapx,mapy)
-		
+
 		--group frames
 		if gInfo then
       local barW = 150
@@ -5754,16 +5815,16 @@ end</script>
       local gy = minimap.y:gsub("px","")+minimap.height:gsub("px","")
       gInfo:move(gx,gy)
 		end
-		
-	end	
+
+	end
 end
 
 function mapStarter()
   setMapUserData("last_modified", getTime(true,"yyyy.MM.ddThh:mm:ss.zzz"))
-  
+
   local saveString = getMudletHomeDir().."/aardwolf/mapBackup_"..getTime(true,"yyyy.MM.ddThh.mm.ss.zzz")..".dat"
 	local savedok = saveMap(saveString)
-	
+
   if not savedok then
     echo("Couldn't save map :(\n")
 		return 0--bail out, map didnt save.
@@ -5772,7 +5833,7 @@ function mapStarter()
 		loadMap(getMudletHomeDir().."/aardwolf/mapStarter.dat")
   end
   --lua display(getMapUserData("last_modified"))
-  --lua display(getAllMapUserData())	
+  --lua display(getAllMapUserData())
 end
 
 function mapCheck()
@@ -5786,19 +5847,19 @@ function mapCheck()
 		aard.log:info("To load the starter map anyway (14907 rooms) type: startermap")
 		aard.log:info("startermap will backup your map before loading the starter map.")
 	else
-		mapStarter()		
+		mapStarter()
 	end
 end
 
 function checkDoor(id,dir)
   local doors = getDoors(id)
-  
+
   if not next(doors) then
 		--cecho("\nThere aren't any doors in the room.")
 		return
 	end
-  
-  local door_status = {"open", "closed", "locked"}  
+
+  local door_status = {"open", "closed", "locked"}
   for direction, door in pairs(doors) do
   	if direction == dir then
 			if dir == "up" then--shorten further
@@ -5814,13 +5875,13 @@ end
 
 function openDoor(dir)
   local doors = getDoors(aard.map.current_room)
-  
+
   if not next(doors) then
 		--cecho("\nThere aren't any doors in the room.")
 		return
 	end
-  
-  local door_status = {"open", "closed", "locked"}  
+
+  local door_status = {"open", "closed", "locked"}
   for direction, door in pairs(doors) do
   	if direction == dir then
   		send("op "..dir,true)
@@ -5949,7 +6010,7 @@ function aard.searchRoom(what)
     local realResult = {}
     for key, value in pairs(type(result) == "table" and result or {}) do
         -- both ways, because searchRoom can return either id-room name or the reverse
-        if type(key) == "string" then					
+        if type(key) == "string" then
           realResult[key:ends(" (road)") and key:sub(1, -8) or key] = value
         else
           realResult[key] = value:ends(" (road)") and value:sub(1, -8) or value
@@ -5968,7 +6029,7 @@ function aard.searchRoomExact(what)
     local realResult = {}
     for key, value in pairs(type(result) == "table" and result or {}) do
         -- both ways, because searchRoom can return either id-room name or the reverse
-        if type(key) == "string" then					
+        if type(key) == "string" then
           realResult[key:ends(" (road)") and key:sub(1, -8) or key] = value
         else
           realResult[key] = value:ends(" (road)") and value:sub(1, -8) or value
@@ -5987,7 +6048,7 @@ function aard.searchRoomArea(what)
     local realResult = {}
     for key, value in pairs(type(result) == "table" and result or {}) do
         -- both ways, because searchRoom can return either id-room name or the reverse
-        if type(key) == "string" then					
+        if type(key) == "string" then
           realResult[key:ends(" (road)") and key:sub(1, -8) or key] = value
         else
 					--search room by string value
@@ -5996,7 +6057,7 @@ function aard.searchRoomArea(what)
 						realResult[key] = value:ends(" (road)") and value:sub(1, -8) or value
 					end
 					--display(getRoomArea(key))
-					--display(getRoomArea(aard.map.seen_room))          
+					--display(getRoomArea(aard.map.seen_room))
         end
     end
     cache[what] = realResult
@@ -6058,7 +6119,7 @@ function mapAddOns.eventHandler(event, mapEvent, ...)
     if event == "mapAddOnEvent" then
         if mapEvent == "safeDelete" then
             safeDelete(arg)
-        elseif mapEvent == "shiftUp" then          
+        elseif mapEvent == "shiftUp" then
             shiftZ(1)
         elseif mapEvent == "shiftDown" then
             shiftZ(-1)
@@ -6099,7 +6160,7 @@ function aard.map:createUnexploredRoom(direction, room) --called from connectExi
 	--display(roomId)
 	--if i use the info in the ASCII map I can also infer when a direction leads to a new zone.
 	--allthough the only option that leaves me with is choosing not to yet mark that room on the map.
-	
+
   aard.log:debug("Attempting to create Unexplored room for "..room)
   if room == -1 then
     aard.log:error("Unable to create room - no room id given by mud")
@@ -6138,23 +6199,23 @@ function aard.map:createUnexploredRoom(direction, room) --called from connectExi
   else
     aard.log:debug("unexploredRoom() getNewCoords() cRoom: "..aard.map.current_room)
     local x,y,z = aard.map:getNewCoords(direction,aard.map.current_room)
-    
+
     local rooms_at_location = getRoomsByPosition(zone_id, x, y, z)
     --display(rooms_at_location)
-    if table.size(rooms_at_location) &gt; 0 then 
+    if table.size(rooms_at_location) &gt; 0 then
       aard.log:debug("unexploredRoom() Found colliding rooms... moving")
       aard.map:moveCollidingRooms(zone_id, x, y, z, direction)
     end
-    
+
     aard.log:debug("New coords set to:"..x.." "..y.." "..z)
     setRoomCoordinates(room, x, y, z)
 	end
-	
+
 	setRoomChar(room, "?")
   aard.log:debug("Created new Unexplored room")
 	local dir_num = aard.map:getExitNum(direction)
 	setExit(aard.map.seen_room, room, dir_num)
- 
+
   if not isCreated then
     aard.log:error("Failed to create new room!")
   end
@@ -6198,14 +6259,14 @@ function aard.map:exploreRoom()
   		aard.map.prior_zone_name=gmcp.room.info.zone
 		end
   end
-	
+
   aard.map.current_room = room_id
 	if firstRoom == true or aard.newzone == true then
 	  aard.map:connectExits(gmcp.room,false)
 	else
 	  aard.map:connectExits(gmcp.room,true)
 	end
-	
+
 	--jakejake
 	--display(aard.other)
 	if aard.other == true then
@@ -6214,7 +6275,7 @@ function aard.map:exploreRoom()
 	end
   centerview(room_id)
   aard.log:debug("Explored room")
- 
+
   if not isCreated then
     aard.log:error("Failed to create new room!")
   end
@@ -6240,7 +6301,7 @@ function aard.map:createRoom()
   isCreated = addRoom(room_id)
   setRoomName(room_id, room_name)
   setRoomArea(room_id, zone_id)
-	
+
 	--JAKE if its a special exit this wont work, because its looking for cardinal direction
 	if aard.map:isCardinalExit(aard.command) then
 		setExit(aard.map.prior_room, room_id, aard.command)
@@ -6253,7 +6314,7 @@ function aard.map:createRoom()
   if terrain_id then
     setRoomEnv(room_id, terrain_id)
   end
-	
+
 	local firstRoom = false
   -- If there is no prior room, then this is the first room of the map
   if not aard.map.prior_room then
@@ -6273,9 +6334,9 @@ function aard.map:createRoom()
 
 		local rooms_at_location = getRoomsByPosition(zone_id, x, y, z)
     --display(rooms_at_location)
-    if table.size(rooms_at_location) &gt; 0 then 
+    if table.size(rooms_at_location) &gt; 0 then
       aard.log:debug("createRoom() Found colliding rooms... moving")
-      aard.map:moveCollidingRooms(zone_id, x, y, z, aard.command) 
+      aard.map:moveCollidingRooms(zone_id, x, y, z, aard.command)
     end
 
     aard.log:debug("New coords set to:"..x.." "..y.." "..z)
@@ -6295,7 +6356,7 @@ function aard.map:createRoom()
   centerview(room_id)
   aard.log:debug("Created new room")
 	aard.newzone = false
- 
+
   if not isCreated then
     aard.log:error("Failed to create new room!")
   end
@@ -6306,7 +6367,7 @@ function aard.map:getNewCoords(command,fromRoom)
     aard.log:error("No command has been sent - can't find new coords")
     return
   end
-  
+
   -- Continents are mapped in the 4th coordinate x,y system
   if gmcp.room.info.coord.cont == 1 then
     aard.log:debug("Continent room: hardcoding coords")
@@ -6315,9 +6376,9 @@ function aard.map:getNewCoords(command,fromRoom)
 
   if gmcp.room.info.zone ~= aard.map.prior_zone_name then
     aard.log:debug("Changed zone, centering map at 0,0,0")
-    return 0,0,0 
+    return 0,0,0
   end
-	
+
   if aard.map:isCardinalExit(command) then
     local direction_traveled = aard.map:getShortExit(command)
     aard.log:debug("Last command was a cardinal exit")
@@ -6423,14 +6484,14 @@ end
   if #speedWalkPath == 0 then
     aard.log:error("No speedwalk path found!")
   end
-	
+
 	local previousID = startID or aard.map.current_room
 	local exits = aard.map:getAllExits(previousID)
   local path = {}
-	
-	
+
+
 	local shrinkExits = {north = "n", south = "s", east = "e", west = "w", northeast = "ne", northwest = "nw", southeast = "se", southwest = "sw", up = "up", down = "down"}
-	
+
   for i, room_id in pairs(speedWalkPath) do
     for j, exit in pairs(exits) do
       if tonumber(room_id) == exit then
@@ -6444,14 +6505,14 @@ end
     end
 		exits = aard.map:getAllExits(room_id)
   end
-	
+
 	local run = ""
 	local runFunc = {}
 	local samedir = 1
 	local es = {north = "n", south = "s", east = "e", west = "w", northeast = "ne", northwest = "nw", southeast = "se", southwest = "sw", up = "u", down = "d"}
-	
+
 	--if string.match("sendhian", matches[2]) then
-	
+
 	if es[path[1]] then
 		run = run.."run "
 	else
@@ -6472,9 +6533,9 @@ end
   while path[1] do
     local dir = path[1]
     table.remove(path, 1)
-		
+
 		if dir == path[1] then--dir is same as previous direction
-			samedir = samedir+1--as long as the direction is same, increment a counter eg 2e 3e 4e until direction change			
+			samedir = samedir+1--as long as the direction is same, increment a counter eg 2e 3e 4e until direction change
 		elseif samedir == 1 then--direction changed, single direction
     	if es[dir] then
     		run = run..es[dir]
@@ -6487,9 +6548,9 @@ end
         	end
         else
         	run = run..";"..dir..";"
-        end				
-    	end			
-		else--direction changed multiple in direction eg 2e 3e 4e		
+        end
+    	end
+		else--direction changed multiple in direction eg 2e 3e 4e
     	if es[dir] then
     		run = run..samedir..es[dir]--no ; or semi colon, this one can be continuance
     	else--only append ;run when direction was not a member of es[dir]
@@ -6497,7 +6558,7 @@ end
     	end
 			samedir = 1
 		end
-  end--while path[1]	
+  end--while path[1]
 	run = string.gsub(run,";;",";")
 	--display(run)
 	return run
@@ -6562,7 +6623,7 @@ function aard.map:isKnownZone(zone_name)
   local zones = getAreaTable()
   local zone_found = false
   local found_zone_id = nil
-  
+
   for known_zone_name, zone_id in pairs(zones) do
     if known_zone_name == zone_name then
       zone_found = true
@@ -6572,7 +6633,7 @@ function aard.map:isKnownZone(zone_name)
     end
   end
 
-  
+
   return zone_found, found_zone_id
 
 end
@@ -6600,7 +6661,7 @@ function aard.map:getZoneId(zone_name)
 end
 
 function aard.map:setZone(zone_name)
-  
+
   -- Set this zone as the active zone
   local zone_id = aard.map:getZoneId(zone_name)
   if zone_id then
@@ -6664,7 +6725,7 @@ function aard.map:getShortExit(command)
   if table.contains(aard.CARDINAL_EXITS_SHORT, command) then
     return command
   elseif table.contains(aard.CARDINAL_EXITS_LONG, command) then
-    
+
     return aard.CARDINAL_EXITS_SHRINK[command]
   end
 end
@@ -6672,7 +6733,7 @@ end
 function aard.map:connectExits(room_data,extraRooms)
   local exits = room_data.info.exits
   local room_id = room_data.info.num
-  
+
   for direction, room in pairs(exits) do-- this is where exits are scanned
     local dir_num = aard.map:getExitNum(direction)
     if roomExists(room) then
@@ -6693,15 +6754,15 @@ function aard.map:connectExits(room_data,extraRooms)
       setExitStub(room_id, dir_num, true)
     end
   end
-  aard.log:debug("Leaving connectExits()") 
+  aard.log:debug("Leaving connectExits()")
 end
 
 function aard.map:connectSpecialExits()
-  if not aard.map:isCardinalExit(aard.command) 
-    and aard.command ~= "l" 
-    and aard.command ~= "look" 
-    and aard.command ~= "recall" 
-		and aard.command ~= "home" 
+  if not aard.map:isCardinalExit(aard.command)
+    and aard.command ~= "l"
+    and aard.command ~= "look"
+    and aard.command ~= "recall"
+		and aard.command ~= "home"
 		and not string.match(aard.command, "dual") --dual wielding after using aardwolf amulet portal is not a portal!
 		and not string.match(aard.command, "run") then--run/runto is not a portal command!
     aard.log:debug("Saw special exit command ("..aard.command.."), linking to prior room")
@@ -7323,10 +7384,10 @@ end</script>
 					<name>questinfo</name>
 					<packageName></packageName>
 					<script>function findAreaID(areaname)
-	
+
   local list = getAreaTable()
 
-  -- iterate over the list of areas, matching them with substring match. 
+  -- iterate over the list of areas, matching them with substring match.
   -- if we get match a single area, then return it's ID, otherwise return
   -- 'false' and a message that there are than one are matches
   local returnid, fullareaname
@@ -7337,23 +7398,23 @@ end</script>
       returnid = id; fullareaname = area
 		--else try exact match
     end
-		
+
   end
-  
+
   --return returnid, fullareaname
 	return returnid
 end
 
 function lookupAreaID(areaname)
-	
+
   local list = getAreaTable()
-	
+
   for area, id in pairs(list) do
     if area == areaname then
       return id--found exact match
-    end		
+    end
   end
-	
+
 	return nil--did not find exact match
 end
 
@@ -7372,7 +7433,7 @@ function echoRoomListArea(areaname)
 				endresult[id] = getRoomName(id)
 			end
     end
-  
+
     -- now display something half-decent looking
     --cecho(string.format("\nList of all rooms in %s (%d):\n", msg, table.size(endresult)))
 		local count = 1
@@ -7381,7 +7442,7 @@ function echoRoomListArea(areaname)
 			hechoLink("|cFF0000"..count, [[gotoRoom(]]..roomid..[[)]], "runto "..roomid, true)
 			count = count + 1
     end
-		
+
   elseif not id and msg then
     echo("\nID not found; " .. msg)
   else
@@ -7395,7 +7456,7 @@ function echoRoomListAreaSearch(areaname)
 	id = lookupAreaID(areaname)
   if id then
     local roomlist, endresult = getAreaRooms(id), {}
-  
+
     -- obtain a room list for each of the room IDs we got
     for _, id in pairs(roomlist) do
       --endresult[id] = getRoomName(id)
@@ -7403,7 +7464,7 @@ function echoRoomListAreaSearch(areaname)
 				endresult[id] = getRoomName(id)
 			end
     end
-  
+
     -- now display something half-decent looking
     --cecho(string.format("\nList of all rooms in %s (%d):\n", msg, table.size(endresult)))
 		local count = 1
@@ -7411,7 +7472,7 @@ function echoRoomListAreaSearch(areaname)
 			echo(" ")
 			hechoLink("|cFF0000"..roomid, [[gotoRoom(]]..roomid..[[)]], "runto "..roomname, true)
     end
-		
+
   --elseif not id and msg then
 	elseif not id then
     echo("\nID not found; " .. areaname)
@@ -7421,10 +7482,10 @@ function echoRoomListAreaSearch(areaname)
 end
 
 function echoRoomList(what)
-	ids = aard.searchRoomExact(what)--creates and uses cache	
+	ids = aard.searchRoomExact(what)--creates and uses cache
 	--display(ids)
 	local count = 1
-  for roomid, roomname in pairs(ids) do		
+  for roomid, roomname in pairs(ids) do
 		--exclude areas with max level of 0, those are continents or special areas
 		if aard.areaIndex[getRoomAreaName(getRoomArea(roomid))].max &gt; 0 then
 		--jakejake
@@ -7502,7 +7563,7 @@ function onChannel()
 	local chan = gmcp.comm.channel.chan
 	local replaced = ansi2decho(comm_data.msg)
 	--display(comm_data)
-	
+
 	if chan == "tell" then
 		chanpEcho("Tell",replaced)
 	elseif chan == "say" then
@@ -7510,7 +7571,7 @@ function onChannel()
 	elseif chan == "gtell" then
 		chanpEcho("Group",replaced)
 	elseif chan == "ftalk" then
-		chanpEcho("Friend",replaced)	
+		chanpEcho("Friend",replaced)
 	elseif chan == "clantalk" then
 		chanpEcho("Clan",replaced)
 	elseif chan == "spouse" then
@@ -7577,7 +7638,7 @@ end</script>
 	--local g1hp, g1mhp = 99999, 99999
 	if aard.config["group"] == 0 then
 
-		
+
 	elseif aard.config["group"] == 1 then
   	--begin create
   	group = group or {}
@@ -7586,11 +7647,11 @@ end</script>
   	gMnBar = gMnBar or {}
   	gMvBar = gMvBar or {}
 		gDamBar = gDamBar or {}
-  	
+
   	local barHb = 14
 		local barHs = 4
   	local barW = 150
-  	
+
   	if not gInfo then
       gInfo = Geyser.Label:new({
         name = "gInfo",
@@ -7601,9 +7662,9 @@ end</script>
       })
   	end
     -- echo("\nminimap.x: " .. minimap.x .. "\n")
-    -- echo("\nShowing ginfo at "..gInfo.x.."\n") 
+    -- echo("\nShowing ginfo at "..gInfo.x.."\n")
   	--gmcp.group.count  this value if larger than x amount could be used for alternate compact EPIC layout.
-  	
+
   	--Does Group Exist?
   	if not gmcp.group.count then
 			--echo clickable link to clear group data
@@ -7620,9 +7681,9 @@ end</script>
   	else
   		gInfo:hide()
   	end
-  	
+
 		if gmcp.group.members then
-		
+
 			aard.group = aard.group or {}
       for _, member in ipairs(gmcp.group.members) do
 				aard.group[member.name] = aard.group[member.name] or {alldam=1,pheal=0}--give 1 free point of damage show the gauges initialize properly
@@ -7669,32 +7730,32 @@ end</script>
           	x=(82+barW)*-1,y=0,
           	width=82,height=barHb+barHs+barHs
           },group[_])
-  				
+
           gAlignBar[_].back:setStyleSheet(GaugeBackGCSS1:getCSS())
           GaugeFrontGCSS1:set("background-color","QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 "..aard.neutralc1..", stop: 1 "..aard.neutralc2..")")
           gAlignBar[_].front:setStyleSheet(GaugeFrontGCSS1:getCSS())
           gAlignBar[_]:setValue(100,100)
-          
+
           gHpBar[_].back:setStyleSheet(GaugeBackGCSS1:getCSS())
           GaugeFrontGCSS1:set("background-color","QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 "..aard.hpc1..", stop: 1 "..aard.hpc2..")")
           gHpBar[_].front:setStyleSheet(GaugeFrontGCSS1:getCSS())
           gHpBar[_]:setValue(100,100)
-          
+
           gMnBar[_].back:setStyleSheet(GaugeBackGCSS1:getCSS())
           GaugeFrontGCSS1:set("background-color","QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 "..aard.mnc1..", stop: 1 "..aard.mnc2..")")
           gMnBar[_].front:setStyleSheet(GaugeFrontGCSS1:getCSS())
           gMnBar[_]:setValue(100,100)
-          
+
           gMvBar[_].back:setStyleSheet(GaugeBackGCSS1:getCSS())
           GaugeFrontGCSS1:set("background-color","QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 "..aard.mvc1..", stop: 1 "..aard.mvc2..")")
           gMvBar[_].front:setStyleSheet(GaugeFrontGCSS1:getCSS())
           gMvBar[_]:setValue(100,100)
-					
+
           gDamBar[_].back:setStyleSheet(GaugeBackGCSS2:getCSS())
           GaugeFrontGCSS1:set("background-color","QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 "..aard.evilc1..", stop: 1 "..aard.evilc2..")")
           gDamBar[_].front:setStyleSheet(GaugeFrontGCSS1:getCSS())
           gDamBar[_]:setValue(1,100)
-					
+
   				gAlignBar[_]:hide()
     		else
           echo("\ngroup[".._.."] exists\n")
@@ -7703,7 +7764,7 @@ end</script>
     				group[_]:show()
     			end
     		end
-				
+
 				--get total group damage
 				local gmdam = 0
         for k, v in pairs(aard.group) do
@@ -7712,21 +7773,21 @@ end</script>
 				--im not sure this is done properly, look at it later to make sure general stats dont overwrite personal ones later
     		if aard.name == gmcp.group.members[_].name then
     			aard.gindex = _
-    			
+
         	if not (gmcp.char.maxstats) then return end
         	local hp_pct = tostring(getPercent(aard.hp, aard.maxhp))
         	local mp_pct = tostring(getPercent(aard.mp, aard.maxmp))
         	local mv_pct = tostring(getPercent(aard.mv, aard.maxmv))
-    
+
           gHpBar[_]:setValue(aard.hp, aard.maxhp,"&lt;b&gt;&amp;nbsp;hp&amp;nbsp;"..aard.hp.."&amp;nbsp;/&amp;nbsp;"..aard.maxhp.."&amp;nbsp;"..string.format("%i", hp_pct).."%&lt;/b&gt;")
           gMnBar[_]:setValue(aard.mp, aard.maxmp)
           gMvBar[_]:setValue(aard.mv, aard.maxmv)
     		end
-    		
+
         local ghp, gmhp = gmcp.group.members[_].info.hp, gmcp.group.members[_].info.mhp
         local gmn, gmmn = gmcp.group.members[_].info.mn, gmcp.group.members[_].info.mmn
         local gmv, gmmv = gmcp.group.members[_].info.mv, gmcp.group.members[_].info.mmv
-				
+
 				if gmdam == 0 then
 					gmdam = 100
 				end
@@ -7734,37 +7795,37 @@ end</script>
 				if aard.group[gmcp.group.members[_].name] then
 					gdam = aard.group[gmcp.group.members[_].name].alldam
 				end
-				
+
 				local galign = gmcp.group.members[_].info.align
-        
+
         local hp_pct = tostring(getPercent(ghp, gmhp))
         local mp_pct = tostring(getPercent(gmn, gmmn))
         local mv_pct = tostring(getPercent(gmv, gmmv))
 				local dam_pct = tostring(getPercent(gdam, gmdam))
-				
 
-        
+
+
 				if ghp &gt; gmhp then
           ghp = gmhp
         end
-        
+
         if gmcp.group.members[_].info.here == 0 then
           gh = "*"
         else
           gh = "&amp;nbsp;"
         end
-        
+
   			gStyleW = '&lt;font style="color:white"&gt;'
     		gStyleR = '&lt;font style="color:'..aard.goodc1..'"&gt;'
-				
+
 				local lvl = gmcp.group.members[_].info.lvl
 				lvl = string.format("%3s", lvl)
 				lvl = string.gsub(lvl," ","&amp;nbsp;")
-  			
+
 				local name = gmcp.group.members[_].name
 				name = string.format("%-9s", string.sub(name, 1, 9))
 				name = string.gsub(name," ","&amp;nbsp;")
-				
+
 				local qt = gmcp.group.members[_].info.qt
 				qt = string.format("%2s", qt)
 				qt = string.gsub(qt," ","&amp;nbsp;")
@@ -7772,12 +7833,12 @@ end</script>
 				local tnl = gmcp.group.members[_].info.tnl
 				tnl = string.format("%4s", tnl)
 				tnl = string.gsub(tnl," ","&amp;nbsp;")
-				
+
 				--local dpct = aard.group[gmcp.group.members[_].name].pheal.."  "..string.format("%i", dam_pct).."%"
 				local dpct = string.format("%i", dam_pct).."%"
 				dpct = string.format("%12s", dpct)
 				dpct = string.gsub(dpct," ","&amp;nbsp;")
-				
+
   			if gmcp.group.members[_].name == gmcp.group.leader then
         	gHpBar[_]:setValue(ghp, gmhp,"&lt;font face='Bitstream Vera Sans Mono'&gt;&lt;b&gt;"..gh..lvl.."&amp;nbsp;"..gStyleR..name..gStyleW.."&amp;nbsp;"..qt.."&amp;nbsp;"..tnl.."&lt;/b&gt;&lt;/font&gt;")
 				else
@@ -7785,9 +7846,9 @@ end</script>
   			end
         gMnBar[_]:setValue(gmn, gmmn)
         gMvBar[_]:setValue(gmv, gmmv)
-				
+
 				gDamBar[_]:setValue(gdam, gmdam,"&lt;font face='Bitstream Vera Sans Mono'&gt;&lt;b&gt;"..dpct.."&amp;nbsp;&lt;/b&gt;&lt;/font&gt;")
-				
+
         if galign &gt; 875 then
           GaugeFrontGCSS1:set("background-color","QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 "..aard.goodc1..", stop: 1 "..aard.goodc2..")")--good
           gAlignBar[_]:setValue(galign, 2500)
@@ -7795,7 +7856,7 @@ end</script>
           GaugeFrontGCSS1:set("background-color","QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 "..aard.neutralc1..", stop: 1 "..aard.neutralc2..")")--neutral
           gAlignBar[_]:setValue(galign, 2500)
         elseif galign &gt; -874 then
-          GaugeFrontGCSS1:set("background-color","QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 "..aard.neutralc1..", stop: 1 "..aard.neutralc2..")")--neutral negative		
+          GaugeFrontGCSS1:set("background-color","QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 "..aard.neutralc1..", stop: 1 "..aard.neutralc2..")")--neutral negative
           gAlignBar[_]:setValue(-1*galign, 2500)
         else
           GaugeFrontGCSS1:set("background-color","QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 "..aard.evilc1..", stop: 1 "..aard.evilc2..")")--evil negative
@@ -7804,7 +7865,7 @@ end</script>
         gAlignBar[_].front:setStyleSheet(GaugeFrontGCSS1:getCSS())
   			gAlignBar[_]:hide()
       end
-	
+
   		--hide any extra containers
     	for i=gmcp.group.count+1,50 do
     		if group[i] then
@@ -7814,11 +7875,11 @@ end</script>
     			break--exit the loop, no containers exist beyond this index.
     		end
     	end
-			
+
 		end
-		
+
 	elseif aard.config["group"] == 2 then
-	
+
 	end
 end</script>
 					<eventHandlerList>
@@ -7860,27 +7921,30 @@ end</script>
 	aard.hp, aard.maxhp = gmcp.char.vitals.hp, gmcp.char.maxstats.maxhp
 	aard.mp, aard.maxmp = gmcp.char.vitals.mana, gmcp.char.maxstats.maxmana
 	aard.mv, aard.maxmv = gmcp.char.vitals.moves, gmcp.char.maxstats.maxmoves
+    aard.hu, aard.thr = gmcp.char.status.hunger, gmcp.char.status.thirst
 
 	local hp_pct = tostring(getPercent(aard.hp, aard.maxhp))
 	local mp_pct = tostring(getPercent(aard.mp, aard.maxmp))
 	local mv_pct = tostring(getPercent(aard.mv, aard.maxmv))
-	
+
 	if aard.hp &gt; aard.maxhp then
 		aard.hp = aard.maxhp
 	end
-  
+
   -- echo("aard.gui.Health"..aard.gui.Health)
-  GUI.Gauges.Health:setValue(aard.hp, aard.maxhp)
-	GUI.Gauges.Mana:setValue(aard.mp, aard.maxmp)
-	GUI.Gauges.Moves:setValue(aard.mv, aard.maxmv)
-	
+    GUI.Gauges.Health:setValue(aard.hp, aard.maxhp," | ("..aard.hpot..") pots")
+	GUI.Gauges.Mana:setValue(aard.mp, aard.maxmp," | ("..aard.spot..") pots")
+	GUI.Gauges.Moves:setValue(aard.mv, aard.maxmv," | ("..aard.mpot..") pots")
+    GUI.Gauges.Hunger:setValue(aard.hu, 100)
+    GUI.Gauges.Thirst:setValue(aard.thr, 100)
+
 	--update group values for my character from char.vitals because it updates faster than group info that is only every 2-3 seconds.
 	if aard.gindex ~= 0 then
 		if aard.config["group"] == 1 then
 			gHpBar[aard.gindex]:setValue(aard.hp, aard.maxhp)
     	gMnBar[aard.gindex]:setValue(aard.mp, aard.maxmp)
     	gMvBar[aard.gindex]:setValue(aard.mv, aard.maxmv)
-		else		
+		else
     	gHpBar[aard.gindex]:setValue(aard.hp, aard.maxhp,"&lt;b&gt;&amp;nbsp;hp&amp;nbsp;"..aard.hp.."&amp;nbsp;/&amp;nbsp;"..aard.maxhp.."&amp;nbsp;"..string.format("%i", hp_pct).."%&lt;/b&gt;")
     	gMnBar[aard.gindex]:setValue(aard.mp, aard.maxmp,"&lt;b&gt;&amp;nbsp;mn&amp;nbsp;"..aard.mp.."&amp;nbsp;/&amp;nbsp;"..aard.maxmp.."&amp;nbsp;"..string.format("%i", mp_pct).."%&lt;/b&gt;")
     	gMvBar[aard.gindex]:setValue(aard.mv, aard.maxmv,"&lt;b&gt;&amp;nbsp;mv&amp;nbsp;"..aard.mv.."&amp;nbsp;/&amp;nbsp;"..aard.maxmv.."&amp;nbsp;"..string.format("%i", mv_pct).."%&lt;/b&gt;")
@@ -7900,7 +7964,7 @@ end</script>
 				<Script isActive="yes" isFolder="no">
 					<name>onRoom</name>
 					<packageName></packageName>
-					<script>function onRoom()	
+					<script>function onRoom()
   if not aard.map.current_room then--value not initialized
     if gmcp.room.info then
       if gmcp.room.info.num then--gmcp room number available
@@ -7912,9 +7976,9 @@ end</script>
   end
   if not (aard.map.init) then return end
 
-  if (aard.special_move) then 
+  if (aard.special_move) then
 	aard.special_move = false
-	return 
+	return
   end
   aard.log:debug("Parsing room")
   if gmcp.room.info then
@@ -7925,7 +7989,7 @@ end</script>
   	end
 	end
   aard.map:parseGmcpRoom()
-	
+
 end
 -- Parse gmcp.room data from the mud
 
@@ -7941,7 +8005,7 @@ function aard.map:parseGmcpRoom()
     aard.log:debug("Entered different zone")
     aard.map:setZone(zone_name)
   end
- 
+
   -- Continent handling
   if gmcp.room.info.coord.cont == 1 then
     aard.log:debug("Continent room seen")
@@ -7962,7 +8026,7 @@ function aard.map:parseGmcpRoom()
   		--aard.log:debug("New room seen - creating...")
       --aard.map:createRoom()
   elseif roomExists(aard.map.seen_room) then
-	
+
     if getRoomEnv(aard.map.seen_room) == 999 then
 				aard.map:exploreRoom()
 --      aard.log:debug("Existing room is a temp room - recreating")
@@ -7986,7 +8050,7 @@ function aard.map:parseGmcpRoom()
 				aard.other = false
 				aard.map:connectSpecialExits()
       end
-			centerview(aard.map.seen_room)--jakejake	
+			centerview(aard.map.seen_room)--jakejake
     	if firstRoom == true or aard.newzone == true then
     	  aard.map:connectExits(gmcp.room,false)
     	else
@@ -8000,7 +8064,7 @@ function aard.map:parseGmcpRoom()
   end
   aard.map.prior_room_data = table.copy(gmcp.room)
   aard.map.prior_zone_name = zone_name
-	
+
 	--call map label update here.
 	--mapLabel(room_data.zone:gsub("^%l", string.upper) .. " - " .. room_data.name)
 	local maptext = room_data.zone:gsub("^%l", string.upper) .. " - " .. aard.stripRoomName(gmcp.room.info.name)
@@ -8070,6 +8134,9 @@ end
 	else
 		table.save(getMudletHomeDir().."/aardwolf/config-"..gmcp.char.base.name..".lua", aard.config)
   end
+  if mainlabel == nil and aard.config["clanshop"] == "true" then
+    cShopMenu()--if rooms are missing from map this can break loading, do it last.
+  end
 end</script>
 					<eventHandlerList>
 						<string>gmcp.char.base</string>
@@ -8101,25 +8168,28 @@ function GUI.Gauge.new(args, container)
     color = args.color
   }
   setmetatable(obj, GUI.Gauge)
-  
+
   obj.gauge = Geyser.Gauge:new({
     name = 'GUI.Gauge.'..obj.name
   }, container)
   obj.gauge.back:setStyleSheet(GUI.Gauges.GaugeBackCSS:getCSS())
-  
+
   value = args.value or args.maxValue or 100
   maxValue = args.maxValue or args.value or 100
   obj:setValue(value, maxValue)
-  
+
   return obj
 end
 
-function GUI.Gauge:setValue(value, maxValue)
+function GUI.Gauge:setValue(value, maxValue, text)
+  local appending = text or ""
   self.gauge:setValue(self:mapValue(value, maxValue))
-  label = self:format(value, maxValue)
+  label = self:format(value, maxValue) .. appending
   self.gauge.back:echo(label)
   self.gauge.front:echo(label)
-  
+  self.gauge.back:setFontSize(16)
+  self.gauge.front:setFontSize(16)
+
   local stylesheet = CSSMan.new(GUI.Gauges.GaugeFrontCSS:getCSS())
   if type(self.color) == 'function' then
     stylesheet:set("background-color", self:color(value))
@@ -8131,7 +8201,7 @@ end
 
 if true or not GUI.Gauges then
   GUI.Gauges = {}
-  
+
   GUI.Footer = Geyser.HBox:new({
     name = "GUI.Footer",
     x = 0,
@@ -8140,7 +8210,7 @@ if true or not GUI.Gauges then
     height = "100%",
   })
   GUIframe.addWindow(GUI.Footer, 'Gauges', 'bottom')
-  
+
   GUI.Gauges.Column1 = Geyser.VBox:new({
     name = "GUI.Gauges.Column1",
   }, GUI.Footer)
@@ -8150,7 +8220,10 @@ if true or not GUI.Gauges then
   GUI.Gauges.Column3 = Geyser.VBox:new({
     name = "GUI.Gauges.Column3",
   }, GUI.Footer)
-  
+  GUI.Gauges.Column4 = Geyser.VBox:new({
+    name = "GUI.Gauges.Column4",
+  }, GUI.Footer)
+
   -- Gauge Styles
   GUI.Gauges.GaugeBackCSS = CSSMan.new([[
     font-weight: bold;
@@ -8172,13 +8245,13 @@ if true or not GUI.Gauges then
     padding: 1px;
     margin: 2px;
   ]])
-  
+
   GUI.Gauges.Enemy = GUI.Gauge.new({
     name = "Enemy",
     unit = "hp",
     color = "QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 "..aard.enemyc1..", stop: 1 "..aard.enemyc2..")",
   }, GUI.Gauges.Column1)
-  
+
   GUI.Gauges.Health = GUI.Gauge.new({
     name = "Health",
     unit = "hp",
@@ -8196,18 +8269,27 @@ if true or not GUI.Gauges then
     unit = "mn",
     color = "QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 "..aard.mnc1..", stop: 1 "..aard.mnc2..")"
   }, GUI.Gauges.Column2)
-  
+
+  GUI.Gauges.Hunger = GUI.Gauge.new({
+    name = "Hunger",
+    unit = "",
+    color = "QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 "..aard.huc1..", stop: 1 "..aard.huc2..")"
+  }, GUI.Gauges.Column3)
+
+  GUI.Gauges.Thirst = GUI.Gauge.new({
+    name = "Thirst",
+    unit = "",
+    color = "QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 "..aard.thrc1..", stop: 1 "..aard.thrc2..")"
+  }, GUI.Gauges.Column3)
+
   GUI.Gauges.ToNextLevel = GUI.Gauge.new({
     name = "Next Level",
     unit = "xp",
-    mapValue = function (self, value, max)
-      return tonumber(max) - tonumber(value), max
-    end,
     format = function (self, value, max)
-      return "Next Level: "..value.." xp"
+      return "XP: "..value.." / "..max
     end,
     color = "QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 "..aard.tnlc1..", stop: 1 "..aard.tnlc2..")"
-  }, GUI.Gauges.Column3)
+  }, GUI.Gauges.Column4)
 
 	GUI.Gauges.Align = GUI.Gauge.new({
     name = "Align",
@@ -8215,7 +8297,7 @@ if true or not GUI.Gauges then
     mapValue = function (self, value, max)
       if value &gt;= 0 then
         return value, max
-      else 
+      else
         return -1 * value, max
       end
     end,
@@ -8228,13 +8310,13 @@ if true or not GUI.Gauges then
         return "QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 "..aard.neutralc1..", stop: 1 "..aard.neutralc2..")"
       elseif v &gt; -874 then
         -- Neutral Negative
-        return "QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 "..aard.neutralc1..", stop: 1 "..aard.neutralc2..")"	
+        return "QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 "..aard.neutralc1..", stop: 1 "..aard.neutralc2..")"
       else
         -- Evil Negative
         return "QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 "..aard.evilc1..", stop: 1 "..aard.evilc2..")"
       end
     end
-  }, GUI.Gauges.Column3)
+  }, GUI.Gauges.Column4)
 end
 </script>
 					<eventHandlerList />
@@ -8313,12 +8395,12 @@ aard.subWidth = aard.subWidth or 200</script>
   table.insert(cshops, "30531")--bard
   table.insert(cshops, "30532")--bard
   table.insert(cshops, "30533")--bard
-	
+
   table.insert(cshops, "49256")--boot
   table.insert(cshops, "49392")--boot
   table.insert(cshops, "50102")--boot
   table.insert(cshops, "50103")--boot
-	
+
   table.insert(cshops, "31123")--crusader
   table.insert(cshops, "49217")--crusader
   table.insert(cshops, "47187")--crusader
@@ -8326,11 +8408,11 @@ aard.subWidth = aard.subWidth or 200</script>
   table.insert(cshops, "31158")--crusader
   table.insert(cshops, "31128")--crusader
   table.insert(cshops, "31156")--crusader
-	
+
   table.insert(cshops, "49335")--gaardian
   table.insert(cshops, "20029")--gaardian
   table.insert(cshops, "20035")--gaardian
-			
+
   table.insert(cshops, "14162")--seekers
   table.insert(cshops, "14141")--seekers
   table.insert(cshops, "14168")--seekers
@@ -8338,19 +8420,19 @@ aard.subWidth = aard.subWidth or 200</script>
   table.insert(cshops, "31594")--tanelorn
   table.insert(cshops, "31584")--tanelorn
   table.insert(cshops, "31566")--tanelorn
-	  
+
   table.insert(cshops, "29214")--tao
   table.insert(cshops, "29220")--tao
   table.insert(cshops, "29221")--tao
   table.insert(cshops, "29223")--tao
   table.insert(cshops, "49373")--tao
-  
+
   table.insert(cshops, "50152")--touchstone
   table.insert(cshops, "28358")--touchstone
   table.insert(cshops, "28361")--touchstone
   table.insert(cshops, "28359")--touchstone
   table.insert(cshops, "50123")--touchstone
-	
+
   table.insert(cshops, "34210")--amazon
 	--baal NONE?
   table.insert(cshops, "15704")--cabal
@@ -8370,14 +8452,14 @@ aard.subWidth = aard.subWidth or 200</script>
 	table.insert(cshops, "19967")--perdition
 	table.insert(cshops, "15141")--pyre
 	table.insert(cshops, "1961")--retribution
-	table.insert(cshops, "502")--rhabdo	
+	table.insert(cshops, "502")--rhabdo
   table.insert(cshops, "24182")--romani
 	table.insert(cshops, "32408")--shadokil
 	table.insert(cshops, "15574")--twinlobe
-  table.insert(cshops, "879")--vanir  
+  table.insert(cshops, "879")--vanir
   table.insert(cshops, "32342")--watchmen
   table.insert(cshops, "49572")--xunti
-	
+
 end
 
 function testFunc(name)
@@ -8405,14 +8487,14 @@ function checkShopArea(roomid)
     if getRoomAreaName(getRoomArea(roomid)) == getRoomAreaName(getRoomArea(room_id)) then
 			areaPlus = areaPlus + 1
 		end
-  end	
+  end
 	if areaPlus &gt; 1 then
 		--multiple shops with that area name, add next/submenu for this area.
   	cshopmenu[areaIndex] = mainlabel:addChild({
     name=getRoomAreaName(getRoomArea(roomid)),
     height=aard.menuHeight,width=100,
     layoutDir="BV", flyOut=true,
-    message=getRoomAreaName(getRoomArea(roomid))})  		
+    message=getRoomAreaName(getRoomArea(roomid))})
     cshopmenu[areaIndex]:setStyleSheet([[background-color: purple; border-width: 1px; border-style: solid; border-color: blue; border-radius: 1px;]])
 		checkShopMenu(roomid)--add to sub menu
 	else
@@ -8434,14 +8516,14 @@ function cShopMenu()
   mainlabel = Geyser.Label:new({name="cshopmenu0",x=0,y=0,height=25,width=100,nestflyout=true,message="&lt;center&gt;ClanShops&lt;/center&gt;"})
   for i, room_id in pairs(cshops) do
 		--echo("\n\nroom_id: "..room_id..", area: "..getRoomAreaName(getRoomArea(cshops[i])))
-		if cshopmenu[1] then		
+		if cshopmenu[1] then
 			if checkShopMenu(cshops[i]) &gt; 0 then--its storing the index value
-    		--found existing shop submenu, and added to it.				
+    		--found existing shop submenu, and added to it.
 			else
 				checkShopArea(cshops[i])--either create a new submenu, or if only shop in that area then add item without submenu
 			end
 		else--first item
-			checkShopArea(cshops[i])--either create a new submenu, or if only shop in that area then add item without submenu			
+			checkShopArea(cshops[i])--either create a new submenu, or if only shop in that area then add item without submenu
 		end
   end
 end</script>
@@ -8457,7 +8539,7 @@ end</script>
 			<script></script>
 			<command></command>
 			<keyCode>-1</keyCode>
-			<keyModifier>-1</keyModifier>
+			<keyModifier>4294967295</keyModifier>
 			<Key isActive="yes" isFolder="no">
 				<name>/ health potion</name>
 				<packageName></packageName>
@@ -8467,24 +8549,10 @@ if aard.hpot &gt; 0 then
 	aard.hpot = aard.hpot -1
 end
 local hp_pct = tostring(getPercent(aard.hp, aard.maxhp))
-Health:setValue(aard.hp, aard.maxhp,"&lt;b&gt; &amp;nbsp; "..aard.hp.."hp | "..string.format("%i", hp_pct).."% &amp;nbsp; ("..aard.hpot..")&lt;/b&gt;")</script>
+GUI.Gauges.Health:setValue(aard.hp, aard.maxhp," | ("..aard.hpot..") pots")</script>
 				<command></command>
 				<keyCode>47</keyCode>
 				<keyModifier>536870912</keyModifier>
-			</Key>
-			<Key isActive="yes" isFolder="no">
-				<name>shift / health potion</name>
-				<packageName></packageName>
-				<script>--to change the potion used, change "config" in Scripts section.
-send("get incomplete "..aard.config["pbag"]..";quaf incomplete",true)
-if aard.hpot &gt; 0 then
-	aard.hpot = aard.hpot -1
-end
-local hp_pct = tostring(getPercent(aard.hp, aard.maxhp))
-Health:setValue(aard.hp, aard.maxhp,"&lt;b&gt; &amp;nbsp; "..aard.hp.."hp | "..string.format("%i", hp_pct).."% &amp;nbsp; ("..aard.hpot..")&lt;/b&gt;")</script>
-				<command></command>
-				<keyCode>47</keyCode>
-				<keyModifier>570425344</keyModifier>
 			</Key>
 			<Key isActive="yes" isFolder="no">
 				<name>* mana potion</name>
@@ -8495,7 +8563,7 @@ if aard.spot &gt; 0 then
 	aard.spot = aard.spot -1
 end
 local mp_pct = tostring(getPercent(aard.mp, aard.maxmp))
-Mana:setValue(aard.mp, aard.maxmp,"&lt;b&gt; &amp;nbsp; "..aard.mp.."mp | "..string.format("%i", mp_pct).."% &amp;nbsp; ("..aard.spot..")&lt;/b&gt;")</script>
+GUI.Gauges.Mana:setValue(aard.mp, aard.maxmp," | ("..aard.spot..") pots")</script>
 				<command></command>
 				<keyCode>42</keyCode>
 				<keyModifier>536870912</keyModifier>
@@ -8509,37 +8577,29 @@ if aard.mpot &gt; 0 then
 	aard.mpot = aard.mpot -1
 end
 local mv_pct = tostring(getPercent(aard.mv, aard.maxmv))
-Moves:setValue(aard.mv, aard.maxmv,"&lt;b&gt; &amp;nbsp; "..aard.mv.."mv | "..string.format("%i", mv_pct).."% &amp;nbsp; ("..aard.mpot..")&lt;/b&gt;")</script>
+GUI.Gauges.Moves:setValue(aard.mv, aard.maxmv," | ("..aard.mpot..") pots")</script>
 				<command></command>
 				<keyCode>45</keyCode>
 				<keyModifier>536870912</keyModifier>
 			</Key>
 			<Key isActive="yes" isFolder="no">
-				<name>+ spellup / attack spell</name>
+				<name>+ buff / attack spell</name>
 				<packageName></packageName>
 				<script>if aard.state == 8 then
 	send(aard.config["attack1"],true)--in combat
-else	
-	send("napalm;spellup int;spellup wis;spellup luck;spellup stats;spellup",true)--out of combat
+else
+	send(aard.config["buff"],true)--out of combat
 end</script>
 				<command></command>
 				<keyCode>43</keyCode>
 				<keyModifier>536870912</keyModifier>
 			</Key>
 			<Key isActive="yes" isFolder="no">
-				<name>shift +   pre-spellup</name>
-				<packageName></packageName>
-				<script>send("c 'intellect fortress';c awakening;c perception;c 'self harmony';c calculation;napalm")</script>
-				<command></command>
-				<keyCode>43</keyCode>
-				<keyModifier>570425344</keyModifier>
-			</Key>
-			<Key isActive="yes" isFolder="no">
-				<name>. scan / debuff</name>
+				<name>.  scan / debuff1</name>
 				<packageName></packageName>
 				<script>if aard.state == 8 then
 	send(aard.config["debuff1"],true)--in combat, debuff
-else	
+else
 	send("scan",true)--out of combat, cleanse
 end</script>
 				<command></command>
@@ -8547,13 +8607,9 @@ end</script>
 				<keyModifier>536870912</keyModifier>
 			</Key>
 			<Key isActive="yes" isFolder="no">
-				<name>7 con all / else combat</name>
+				<name>7 score</name>
 				<packageName></packageName>
-				<script>if aard.state == 8 then
-	send(aard.config["debuff2"],true)--in combat
-else	
-	send("con all",true)--out of combat
-end</script>
+				<script>send("score",true)</script>
 				<command></command>
 				<keyCode>55</keyCode>
 				<keyModifier>536870912</keyModifier>
@@ -8629,12 +8685,12 @@ send("n",true)</script>
 				<keyModifier>536870912</keyModifier>
 			</Key>
 			<Key isActive="yes" isFolder="no">
-				<name>0 key</name>
+				<name>0 con all / debuff2</name>
 				<packageName></packageName>
-				<script>if aard.state == 8 then	
+				<script>if aard.state == 8 then
 	send(aard.config["debuff2"],true)--in combat
 else
-	send("score",true)--out of combat
+  send("con all",true)--out of combat
 end</script>
 				<command></command>
 				<keyCode>48</keyCode>
@@ -8733,7 +8789,7 @@ local areaExits = getAreaExits(areaID)
 
 if not areaExits[1] then--must be noexit/portal entrance
 	--check all path costs and choose the lowest cost
-  local roomlist = getAreaRooms(areaID)  
+  local roomlist = getAreaRooms(areaID)
   -- obtain a room list for each of the room IDs we got
 	lowestcost = 9000
 	tryroom = 0
@@ -8752,11 +8808,11 @@ if not areaExits[1] then--must be noexit/portal entrance
 	if gmcp.room.info.num == tryroom then
 		echo(" (current room)")
 	end
-	echo("\n")	
+	echo("\n")
 elseif not areaExits[2] then--only one possible room
 	local id = areaExits[1]
 	echo(getRoomName(id).." ")
-	
+
 	hechoLink("|cFF0000"..id, [[gotoRoom(]]..id..[[)]], "runto "..id, true)
 	--highlight room
 	echo(" ")
@@ -8774,7 +8830,7 @@ else--multiple exits
 		hechoLink("|c00FF00".."[h]", [[highlightRoom(]]..id..[[,0,150,0,255,100,100,1,255,255)]], "highlight "..id, true)
 		if gmcp.room.info.num == id then
 			echo(" (current room)")
-		end		
+		end
 		echo("\n")
   end
 end</script>
@@ -8793,10 +8849,10 @@ print(env,conn)
 status,errorString = conn:execute([[CREATE TABLE Armor ('id' INTEGER PRIMARY KEY AUTOINCREMENT, 'name' TEXT)]])
 print(status,errorString )
 
-status,errorString = conn:execute([[CREATE TABLE ArmorStats ('id' INTEGER PRIMARY KEY AUTOINCREMENT, 
- 'stat' TEXT, 
- 'val' INTEGER, 
- 'fkid' INTEGER NOT NULL, 
+status,errorString = conn:execute([[CREATE TABLE ArmorStats ('id' INTEGER PRIMARY KEY AUTOINCREMENT,
+ 'stat' TEXT,
+ 'val' INTEGER,
+ 'fkid' INTEGER NOT NULL,
  FOREIGN KEY (fkid) REFERENCES Armor(id))]])
 print(status,errorString )
 
