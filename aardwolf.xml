@@ -5496,7 +5496,7 @@ registerAnonymousEventHandler("sysWindowResizeEvent","GUIframe.eventHandler")</s
   gStyleW = '&lt;font style="color:#ffffff"&gt;'
   gStyleG = '&lt;font style="color:#1aa41a"&gt;'
 
-  GUI.Gauges.ToNextLevel:setValue(aard.tnl, aard.tnlmax)
+    GUI.Gauges.ToNextLevel:setValue(aard.tnlmax-aard.tnl, aard.tnlmax, "&lt;br&gt;Quest: "..aard.qtime.." Blessing: "..aard.dtime)
 end
 
 function guiLoad()
@@ -8285,11 +8285,8 @@ if true or not GUI.Gauges then
   GUI.Gauges.ToNextLevel = GUI.Gauge.new({
     name = "Next Level",
     unit = "xp",
-    mapValue = function (self, value, max)
-      return tonumber(max) - tonumber(value), max
-    end,
     format = function (self, value, max)
-      return "Next Level: "..value.." xp"
+      return "XP: "..value.." / "..max
     end,
     color = "QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 "..aard.tnlc1..", stop: 1 "..aard.tnlc2..")"
   }, GUI.Gauges.Column4)
